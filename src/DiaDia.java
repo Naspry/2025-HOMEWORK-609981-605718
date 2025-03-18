@@ -86,8 +86,11 @@ public class DiaDia {
 	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
 	 */
 	private void vai(String direzione) {
-		if(direzione==null)
+		if(direzione==null) {
+			Scanner scannerDirezione = new Scanner(System.in);
 			System.out.println("Dove vuoi andare ?");
+			direzione = scannerDirezione.nextLine();
+		}
 		Stanza prossimaStanza = null;
 		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
