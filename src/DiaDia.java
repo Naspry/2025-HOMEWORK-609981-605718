@@ -25,8 +25,8 @@ public class DiaDia {
 			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
-	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "cfu"};
 
 	private Partita partita;
 
@@ -53,25 +53,36 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
-
+			
 		if (comandoDaEseguire.getNome().equals("fine")) {
 			this.fine(); 
 			return true;
 		} else if (comandoDaEseguire.getNome().equals("vai"))
 			this.vai(comandoDaEseguire.getParametro());
+		else if(comandoDaEseguire.getNome().equals("cfu"))
+			this.cfu();
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
 			System.out.println("Hai vinto!");
+			System.out.println("Con "+this.partita.getGiocatore().getCfu()+" cfu");
 			return true;
 		} else
 			return false;
 	}   
 
 	// implementazioni dei comandi dell'utente:
-
+	
+	/**
+	 * Stampa informazioni di cfu.
+	 * @param string 
+	 */
+	private void cfu() {
+		System.out.println(this.partita.getGiocatore().getCfu());
+	}
+	
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
@@ -92,15 +103,16 @@ public class DiaDia {
 			direzione = scannerDirezione.nextLine();
 		}
 		Stanza prossimaStanza = null;
-		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
+		prossimaStanza = this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
 			System.out.println("Direzione inesistente");
 		else {
-			this.partita.setStanzaCorrente(prossimaStanza);
-		//	int cfu = this.partita.getCfu();
-	//		this.partita.setCfu(cfu--);
+			this.partita.getLabirinto().setStanzaCorrente(prossimaStanza);
+			int cfu = this.partita.getGiocatore().getCfu();
+			cfu -= 1;
+			this.partita.getGiocatore().setCfu(cfu);
 		}
-		System.out.println(partita.getStanzaCorrente().getDescrizione());
+		System.out.println(partita.getLabirinto().getStanzaCorrente().getDescrizione());
 	}
 
 	/**
