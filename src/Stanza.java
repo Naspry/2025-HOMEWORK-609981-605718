@@ -169,9 +169,19 @@ public class Stanza {
 	 * @param nomeAttrezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		// TODO da implementare
-		return false;
+	public boolean removeAttrezzo(Stanza stanza, Attrezzo attrezzo) {
+	    if (stanza == null || attrezzo == null) {
+	        return false;
+	    }
+
+	    for (int i = 0; i < this.attrezzi.length; i++) {
+	        if (this.attrezzi[i] != null && this.attrezzi[i].toString().equals(attrezzo.toString())){
+	            this.attrezzi[i] = null; 
+	            return true; 
+	        }
+	    }
+
+	    return false; 
 	}
 
 
