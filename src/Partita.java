@@ -24,12 +24,6 @@ public class Partita {
 		this.finita = false;
 	}
 
-
-	/**
-	 * Restituisce vero se e solo se la partita e' stata vinta
-	 * @return vero se partita vinta
-	 */
-
 	/**
 	 * Restituisce vero se e solo se la partita e' finita
 	 * @return vero se partita finita
@@ -38,10 +32,6 @@ public class Partita {
 		return finita || isVinta() || (giocatore.getCfu() == 0);
 	}
 
-	/**
-	 * Imposta la partita come finita
-	 *
-	 */
 	public void setFinita() {
 		this.finita = true;
 	}
