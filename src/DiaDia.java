@@ -53,7 +53,7 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
-			
+
 		if (comandoDaEseguire.getNome().equals("fine")) {
 			this.fine(); 
 			return true;
@@ -65,16 +65,23 @@ public class DiaDia {
 			this.aiuto();
 		else
 			System.out.println("Comando sconosciuto");
-		if (this.partita.vinta()) {
-			System.out.println("Hai vinto!");
-			System.out.println("Con "+this.partita.getGiocatore().getCfu()+" cfu");
+
+		if (this.partita.isFinita()) {
+			if (this.partita.isVinta() && this.partita.getGiocatore().getCfu()>0) {
+				System.out.println("Congratulazioni,");
+				System.out.println("hai vinto con "+this.partita.getGiocatore().getCfu()+" cfu");
+			}
+			else
+				System.out.println("Mi dispiace, hai perso!");
 			return true;
-		} else
-			return false;
+		}
+
+
+		return false;
 	}   
 
 	// implementazioni dei comandi dell'utente:
-	
+
 	/**
 	 * Stampa informazioni di cfu.
 	 * @param string 
@@ -82,7 +89,7 @@ public class DiaDia {
 	private void cfu() {
 		System.out.println(this.partita.getGiocatore().getCfu());
 	}
-	
+
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
