@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author  docente di POO
  * @version base
  */
-
+//pippo pluto
 public class Comando {
 
     private String nome;
