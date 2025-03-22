@@ -12,17 +12,13 @@
 
 public class Partita {
 
-	static final private int CFU_INIZIALI = 20;
-
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	private boolean finita;
-	private int cfu;
 	
 	public Partita(){
 		creaStanze();
 		this.finita = false;
-		this.cfu = CFU_INIZIALI;
 	}
 
     /**
@@ -88,9 +84,9 @@ public class Partita {
 	 * Restituisce vero se e solo se la partita e' finita
 	 * @return vero se partita finita
 	 */
-	public boolean isFinita() {
-		return finita || vinta() || (cfu == 0);
-	}
+//	public boolean isFinita() {
+//		return finita || vinta() || (giocatore.getCfu() == 0);
+//	}
 
 	/**
 	 * Imposta la partita come finita
@@ -100,11 +96,4 @@ public class Partita {
 		this.finita = true;
 	}
 
-	public int getCfu() {
-		return this.cfu;
-	}
-
-	public void setCfu(int cfu) {
-		this.cfu = cfu;		
-	}	
 }
