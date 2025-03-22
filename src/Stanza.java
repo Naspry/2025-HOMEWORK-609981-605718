@@ -169,8 +169,8 @@ public class Stanza {
 	 * @param nomeAttrezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	public boolean removeAttrezzo(Stanza stanza, Attrezzo attrezzo) { 		// TODO Alfredo perchè hai aggiunto il param stanza?
-		if (stanza == null || attrezzo == null) {
+	public boolean removeAttrezzo( Attrezzo attrezzo) { 		// TODO Alfredo perchè hai aggiunto il param stanza?
+		if (attrezzo == null) {
 			return false;
 		}
 
