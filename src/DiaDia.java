@@ -32,6 +32,8 @@ public class DiaDia {
 	private IOConsole io;
 	
 
+	public static IOConsole io;
+
 	public DiaDia(IOConsole io) {
 		this.partita = new Partita();
 		this.io = io;
@@ -69,7 +71,10 @@ public class DiaDia {
 
 		if (this.partita.isFinita()) {
 			if (this.partita.isVinta() && this.partita.getGiocatore().getCfu()>0) {
+
 				io.mostraMessaggio("Congratulazioni, sei in Biblioteca");
+				io.mostraMessaggio("hai vinto con "+this.partita.getGiocatore().getCfu()+" cfu");
+				io.mostraMessaggio("Congratulazioni, sei in "+this.partita.getLabirinto().getStanzaCorrente().getNome());
 				io.mostraMessaggio("hai vinto con "+this.partita.getGiocatore().getCfu()+" cfu");
 			}
 			else
@@ -114,14 +119,17 @@ public class DiaDia {
 		if (prossimaStanza == null)
 			io.mostraMessaggio("Direzione inesistente");
 		else {
+			//diminuisci cfu per spostamento
 			this.partita.getLabirinto().setStanzaCorrente(prossimaStanza);
 			int cfu = this.partita.getGiocatore().getCfu();
 			cfu -= 1;
 			this.partita.getGiocatore().setCfu(cfu);
+			//se cambi stanza ma non sei in quella vincente stampa una desc.
+			if(this.partita.getLabirinto().getStanzaCorrente()!=this.partita.getLabirinto().getStanzaFinale()) {
+				io.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().getDescrizione());
+			}
 		}
-		if(this.partita.getLabirinto().getStanzaCorrente()!=this.partita.getLabirinto().getStanzaFinale()) {
-			io.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().getDescrizione());
-		}
+
 	}
 
 	/**

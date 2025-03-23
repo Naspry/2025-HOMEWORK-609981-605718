@@ -1,7 +1,4 @@
 
-
-
-
 /**
  * Questa classe modella una partita del gioco
  *
