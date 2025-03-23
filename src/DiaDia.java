@@ -28,11 +28,9 @@ public class DiaDia {
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "cfu", "prendi", "posa"};
 
 	private Partita partita;
-	
-	private IOConsole io;
-	
 
-	public static IOConsole io;
+	private IOConsole io;
+
 
 	public DiaDia(IOConsole io) {
 		this.partita = new Partita();
@@ -71,9 +69,6 @@ public class DiaDia {
 
 		if (this.partita.isFinita()) {
 			if (this.partita.isVinta() && this.partita.getGiocatore().getCfu()>0) {
-
-				io.mostraMessaggio("Congratulazioni, sei in Biblioteca");
-				io.mostraMessaggio("hai vinto con "+this.partita.getGiocatore().getCfu()+" cfu");
 				io.mostraMessaggio("Congratulazioni, sei in "+this.partita.getLabirinto().getStanzaCorrente().getNome());
 				io.mostraMessaggio("hai vinto con "+this.partita.getGiocatore().getCfu()+" cfu");
 			}
