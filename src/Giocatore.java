@@ -1,6 +1,6 @@
 
 public class Giocatore {
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = 21;
 	private int cfu;
 
 	public Giocatore() {
