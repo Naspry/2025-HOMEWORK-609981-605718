@@ -13,14 +13,14 @@ public class Giocatore {
 		this.labirinto = labirinto;
 	}
 
-	public boolean prendi(String attrezzo) {
+	public boolean prendi(String nomeAttrezzo) {
 		Stanza stanzaCorrente = labirinto.getStanzaCorrente();
 		if(!borsa.isFull()) {
-			if(stanzaCorrente.hasAttrezzo(attrezzo)) {
-				Attrezzo att = stanzaCorrente.getAttrezzo(attrezzo);
+			if(stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
+				Attrezzo att = stanzaCorrente.getAttrezzo(nomeAttrezzo);
 				if(borsa.getPeso() + att.getPeso() < borsa.getPesoMax()) {
 					borsa.addAttrezzo(att);
-					stanzaCorrente.removeAttrezzo(stanzaCorrente.getAttrezzo(attrezzo));
+					stanzaCorrente.removeAttrezzo(stanzaCorrente.getAttrezzo(nomeAttrezzo));
 					return true;
 				}//else return -2;
 			}//else return -3;
@@ -29,18 +29,21 @@ public class Giocatore {
 		return false;
 	}
 
-	public boolean posa(String attrezzo) {
+	public boolean posa(String nomeAttrezzo) {
 		Stanza stanzaCorrente = labirinto.getStanzaCorrente();
-		if(stanzaCorrente.hasAttrezzo(attrezzo))
-			if(!borsa.isEmpty() && stanzaCorrente.getNumeroAttrezzi() < 10) {
-				Attrezzo att = borsa.getAttrezzo(attrezzo);
-				stanzaCorrente.addAttrezzo(att);
-				borsa.removeAttrezzo(att);
-				return true;
+		if(borsa.hasAttrezzo(nomeAttrezzo)) {
+			if(!borsa.isEmpty() ) {
+				if(stanzaCorrente.getNumeroAttrezzi() < 10) {
+					Attrezzo att = borsa.removeAttrezzo(borsa.getAttrezzo(nomeAttrezzo));
+					if(att != null) {
+						stanzaCorrente.addAttrezzo(att);
+						return true;
+					}
+				}
 			}
+		}
 		return false;
 	}
-
 
 	public void creaGiocatore() {
 		cfu = CFU_INIZIALI;
