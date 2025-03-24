@@ -22,6 +22,10 @@ public class Labirinto {
 		return this.stanzaFinale;
 	}
 	
+	public void setStanzaFinale(Stanza stanzaFinale) {
+		this.stanzaFinale = stanzaFinale;
+	}
+	
 	private void creaStanze() {
 
 		/* crea gli attrezzi */

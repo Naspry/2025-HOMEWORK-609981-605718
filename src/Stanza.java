@@ -35,7 +35,7 @@ public class Stanza {
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.numeroStanzeAdiacenti = 0;
-		this.numeroAttrezzi = 0;
+		this.setNumeroAttrezzi(0);
 		this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI];
 		this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI];
 		this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
@@ -104,9 +104,9 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
-			this.attrezzi[numeroAttrezzi] = attrezzo;
-			this.numeroAttrezzi++;
+		if (this.getNumeroAttrezzi() < NUMERO_MASSIMO_ATTREZZI) {
+			this.attrezzi[getNumeroAttrezzi()] = attrezzo;
+			this.setNumeroAttrezzi(this.getNumeroAttrezzi() + 1);
 			return true;
 		}
 		else {
@@ -142,8 +142,10 @@ public class Stanza {
 		boolean trovato;
 		trovato = false;
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
-				trovato = true;
+			if(attrezzo != null) {
+				if (attrezzo.getNome().equals(nomeAttrezzo))
+					trovato = true;
+			}
 		}
 		return trovato;
 	}
@@ -158,8 +160,9 @@ public class Stanza {
 		Attrezzo attrezzoCercato;
 		attrezzoCercato = null;
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
-				attrezzoCercato = attrezzo;
+			if(attrezzo != null)
+				if (attrezzo.getNome().equals(nomeAttrezzo))
+					attrezzoCercato = attrezzo;
 		}
 		return attrezzoCercato;	
 	}
@@ -169,7 +172,7 @@ public class Stanza {
 	 * @param nomeAttrezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	public boolean removeAttrezzo( Attrezzo attrezzo) { 		// TODO Alfredo perchè hai aggiunto il param stanza?
+	public boolean removeAttrezzo(Attrezzo attrezzo) { 
 		if (attrezzo == null) {
 			return false;
 		}
@@ -190,6 +193,14 @@ public class Stanza {
 		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
 			direzioni[i] = this.direzioni[i];
 		return direzioni;
+	}
+
+	public int getNumeroAttrezzi() {
+		return numeroAttrezzi;
+	}
+
+	public void setNumeroAttrezzi(int numeroAttrezzi) {
+		this.numeroAttrezzi = numeroAttrezzi;
 	}
 
 }

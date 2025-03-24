@@ -25,7 +25,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "cfu", "prendi", "posa"};
+	static final private String[] elencoComandi = {"vai", "cfu", "prendi", "posa","borsa", "fine","aiuto"};
 
 	private Partita partita;
 
@@ -41,6 +41,7 @@ public class DiaDia {
 		String istruzione; 
 
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);	
+
 		do		
 			istruzione = io.leggiRiga();
 		while (!processaIstruzione(istruzione));
@@ -58,12 +59,19 @@ public class DiaDia {
 		if (comandoDaEseguire.getNome().equals("fine")) {
 			this.fine(); 
 			return true;
-		} else if (comandoDaEseguire.getNome().equals("vai"))
+		} 
+		else if (comandoDaEseguire.getNome().equals("vai"))
 			this.vai(comandoDaEseguire.getParametro());
 		else if(comandoDaEseguire.getNome().equals("cfu"))
 			this.cfu();
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posa(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendi(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("borsa"))
+			this.stampaBorsa();
 		else
 			io.mostraMessaggio("Comando sconosciuto");
 
@@ -88,18 +96,18 @@ public class DiaDia {
 	 * @param string 
 	 */
 	private void cfu() {
-		io.mostraMessaggio("Ti sono rimasti " + this.partita.getGiocatore().getCfu()+" cfu");
+		io.mostraMessaggio("Hai " + this.partita.getGiocatore().getCfu()+" cfu");
 	}
 
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
+
 	private void aiuto() {
 		for(int i=0; i< elencoComandi.length; i++) 
-			System.out.print(elencoComandi[i]+" ");
+			io.mostraMessaggio("- "+elencoComandi[i]);
 		io.mostraMessaggio("");
 	}
-
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
 	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
@@ -125,13 +133,26 @@ public class DiaDia {
 			}
 		}
 
+	} 
+	
+	private void stampaBorsa() {
+		this.partita.getGiocatore().getBorsa().toString();
 	}
-
-	/**
-	 * Comando "Fine".
-	 */
+	
+	private void prendi(String attrezzo) {
+		if(attrezzo==null) {
+			io.mostraMessaggio("Quale attrezzo vuoi prendere ?");
+			attrezzo = io.leggiRiga();
+		}
+		this.partita.getGiocatore().prendi(attrezzo);
+	}
+	
+	private void posa(String attrezzo) {
+		this.partita.getGiocatore().posa(attrezzo);
+	}
+	
 	private void fine() {
-		io.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
+		io.mostraMessaggio("Grazie di aver giocato!");
 	}
 
 	public static void main(String[] argc) {
