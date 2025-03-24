@@ -25,14 +25,7 @@ public class Partita {
 	 * Restituisce vero se e solo se la partita e' finita
 	 * @return vero se partita finita
 	 */
-	public boolean isFinita() {
-		return finita || isVinta() || (giocatore.getCfu() == 0);
-	}
-
-	public void setFinita() {
-		this.finita = true;
-	}
-
+	
 	public Labirinto getLabirinto() {
 		return this.labirinto;
 	}
@@ -42,7 +35,15 @@ public class Partita {
 		return this.giocatore;
 	}
 
+	public boolean isFinita() {
+		return finita || isVinta() || (giocatore.getCfu() == 0);
+	}
 
+	public void setFinita() {
+		this.finita = true;
+	}
+
+	
 	public boolean isVinta() {
 		return this.labirinto.getStanzaCorrente() == this.labirinto.getStanzaFinale();
 	}
