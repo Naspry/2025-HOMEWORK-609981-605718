@@ -8,7 +8,6 @@ public class Labirinto {
 		creaStanze();
 	}
 	
-	
 	public Stanza getStanzaCorrente() {
 		return stanzaCorrente;
 	}
