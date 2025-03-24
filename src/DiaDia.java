@@ -136,7 +136,7 @@ public class DiaDia {
 	} 
 	
 	private void stampaBorsa() {
-		this.partita.getGiocatore().getBorsa().toString();
+		io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 	}
 	
 	private void prendi(String attrezzo) {
@@ -144,11 +144,23 @@ public class DiaDia {
 			io.mostraMessaggio("Quale attrezzo vuoi prendere ?");
 			attrezzo = io.leggiRiga();
 		}
-		this.partita.getGiocatore().prendi(attrezzo);
+		if(this.partita.getGiocatore().prendi(attrezzo)) {
+			io.mostraMessaggio("Hai preso " + attrezzo);
+		}else {
+			io.mostraMessaggio("Errore ");
+		}
 	}
 	
 	private void posa(String attrezzo) {
-		this.partita.getGiocatore().posa(attrezzo);
+		if(attrezzo==null) {
+			io.mostraMessaggio("Quale attrezzo vuoi prendere ?");
+			attrezzo = io.leggiRiga();
+		}
+		if(this.partita.getGiocatore().posa(attrezzo)) {
+			io.mostraMessaggio("Hai posato " + attrezzo + " in " + partita.getLabirinto().getStanzaCorrente().getNome());
+		}else {
+			io.mostraMessaggio("Errore ");
+		}
 	}
 	
 	private void fine() {

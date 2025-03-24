@@ -18,11 +18,15 @@ public class Giocatore {
 		if(!borsa.isFull()) {
 			if(stanzaCorrente.hasAttrezzo(attrezzo)) {
 				Attrezzo att = stanzaCorrente.getAttrezzo(attrezzo);
-				borsa.addAttrezzo(att);
-				stanzaCorrente.removeAttrezzo(stanzaCorrente.getAttrezzo(attrezzo));
-				return true;
+				if(borsa.getPeso() + att.getPeso() < borsa.getPesoMax()) {
+					borsa.addAttrezzo(att);
+					stanzaCorrente.removeAttrezzo(stanzaCorrente.getAttrezzo(attrezzo));
+					return true;
+				}	
 			}
 		}
+		//bisogna mettere tutte le else cosi stampa piu chiaramente quale è il problema
+		//es: -1 (se hai la borsa piena) -2 (se il peso è maxato) -3 (se non cè l'item)
 		return false;
 	}
 	
