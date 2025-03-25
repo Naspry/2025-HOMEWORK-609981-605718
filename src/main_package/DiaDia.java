@@ -1,3 +1,4 @@
+package main_package;
 
 import it.uniroma3.diadia.IOConsole;
 

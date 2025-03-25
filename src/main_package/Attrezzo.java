@@ -1,6 +1,5 @@
 /* Prova */
-
-
+package main_package;
 
 /**
  * Una semplice classe che modella un attrezzo.

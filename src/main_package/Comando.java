@@ -1,5 +1,6 @@
-
 //commento1
+package main_package;
+
 
 import java.util.Scanner;
 

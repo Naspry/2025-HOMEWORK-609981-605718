@@ -1,6 +1,5 @@
 //ciao prima modifica di Alfredo
-
-
+package main_package;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.

@@ -1,3 +1,4 @@
+package main_package;
 
 public class Giocatore {
 	static final private int CFU_INIZIALI = 21;

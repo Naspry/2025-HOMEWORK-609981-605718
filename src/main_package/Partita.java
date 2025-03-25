@@ -1,3 +1,4 @@
+package main_package;
 
 /**
  * Questa classe modella una partita del gioco
