@@ -1,5 +1,7 @@
 package main_package;
 
+import it.uniroma3.diadia.IOConsole;
+
 /**
  * Questa classe modella una partita del gioco
  *
@@ -13,13 +15,13 @@ public class Partita {
 	private Giocatore giocatore;
 	
 	private Labirinto labirinto;
-
+	private IOConsole io;
 	private boolean finita;
 
-	public Partita(){
-		
+	public Partita(IOConsole io){
+		this.io = io;
 		this.labirinto = new Labirinto();
-		this.giocatore = new Giocatore(labirinto);
+		this.giocatore = new Giocatore(labirinto, io);
 		this.finita = false;
 	}
 
@@ -31,7 +33,6 @@ public class Partita {
 	public Labirinto getLabirinto() {
 		return this.labirinto;
 	}
-
 
 	public Giocatore getGiocatore() {
 		return this.giocatore;

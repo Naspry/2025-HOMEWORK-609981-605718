@@ -1,4 +1,3 @@
-//ciao prima modifica di Alfredo
 package main_package;
 
 /**
@@ -172,18 +171,20 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) { 
-		if (attrezzo == null) {
-			return false;
-		}
+		 if (attrezzo == null) {
+		        return false;
+		    }
 
-		for (int i = 0; i < this.attrezzi.length; i++) {
-			if (this.attrezzi[i] != null && this.attrezzi[i].toString().equals(attrezzo.toString())){
-				this.attrezzi[i] = null; 
-				return true; 
-			}
-		}
+		    for (int i = 0; i < this.numeroAttrezzi; i++) {
+		        if (this.attrezzi[i] != null && this.attrezzi[i].toString().equals(attrezzo.toString())) {
+		            this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1]; // Sostituisco con l'ultimo attrezzo
+		            this.attrezzi[this.numeroAttrezzi - 1] = null; // Cancello l'ultimo elemento
+		            this.numeroAttrezzi--; // Riduco il numero di attrezzi
+		            return true;
+		        }
+		    }
 
-		return false; 
+		    return false;
 	}
 
 

@@ -1,14 +1,17 @@
 package main_package;
 
+import it.uniroma3.diadia.IOConsole;
+
 public class Giocatore {
 	static final private int CFU_INIZIALI = 21;
 	private int cfu;
 
 	private Labirinto labirinto;
-
+	private IOConsole io;
 	private Borsa borsa;
 
-	public Giocatore(Labirinto labirinto) {
+	public Giocatore(Labirinto labirinto, IOConsole io) {
+		this.io = io;
 		creaGiocatore();
 		this.borsa = new Borsa();
 		this.labirinto = labirinto;

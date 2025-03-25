@@ -34,7 +34,7 @@ public class DiaDia {
 
 
 	public DiaDia(IOConsole io) {
-		this.partita = new Partita();
+		this.partita = new Partita(io);
 		this.io = io;
 	}
 
@@ -92,10 +92,6 @@ public class DiaDia {
 
 	// implementazioni dei comandi dell'utente:
 
-	/**
-	 * Stampa informazioni di cfu.
-	 * @param string 
-	 */
 	private void cfu() {
 		io.mostraMessaggio("Hai " + this.partita.getGiocatore().getCfu()+" cfu");
 	}
