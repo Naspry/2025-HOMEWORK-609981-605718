@@ -18,10 +18,12 @@ public class Partita {
 	
 	private Labirinto labirinto;
 	private boolean finita;
+	
+	private IOConsole io;
 
-	public Partita(){
+	public Partita(IOConsole io){
 		this.labirinto = new Labirinto();
-		this.giocatore = new Giocatore(labirinto);
+		this.giocatore = new Giocatore(labirinto, io);
 		this.finita = false;
 	}
 

@@ -12,11 +12,12 @@ class PartitaTest {
 	private Partita partita;
 	private Labirinto labirinto;
 	private Giocatore giocatore;
+	private IOConsole io;
 
 	
 	@BeforeEach
 	void setUp() {
-		partita = new Partita();  // Initialize a new game
+		partita = new Partita(io);  // Initialize a new game
 		labirinto = partita.getLabirinto(); // Get the labyrinth
 		giocatore = partita.getGiocatore(); // Get the player
 	}

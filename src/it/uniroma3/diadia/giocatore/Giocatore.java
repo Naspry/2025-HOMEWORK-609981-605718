@@ -13,11 +13,11 @@ public class Giocatore {
 	private Borsa borsa;
 	private IOConsole io;
 
-	public Giocatore(Labirinto labirinto) { 
+	public Giocatore(Labirinto labirinto, IOConsole io) { 
 		this.cfu = CFU_INIZIALI;
 		this.borsa = new Borsa();
 		this.labirinto = labirinto;
-		this.io = new IOConsole();
+		this.io = io;
 	}
 	
 	/**
