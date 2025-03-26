@@ -2,6 +2,17 @@ package it.uniroma3.diadia.giocatore;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+
+/**
+ * Classe Borsa - un giocatore ha a disposizione
+ * una borsa con la quale può raccogliere attrezzi
+ * sparsi lungo il labirinto
+ * 
+ * @author Alfredo e Nazar
+ * @see Giocatore, Attrezzi
+ * @version 0.0.2.a
+ */
+
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private int pesoMax;

@@ -3,7 +3,7 @@ package it.uniroma3.diadia;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
- * Per giocare crea un'istanza di questa classe e invoca il letodo gioca
+ * Per giocare crea un'istanza di questa classe e invoca il metodo gioca
  *
  * Questa e' la classe principale crea e istanzia tutte le altre
  *
@@ -25,7 +25,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = {"vai", "cfu", "prendi", "posa","borsa", "fine","aiuto"};
+	static final private String[] elencoComandi = {"vai", "cfu", "prendi", "posa","borsa", "fine","aiuto","stanza"};
 
 	private Partita partita;
 
@@ -62,8 +62,10 @@ public class DiaDia {
 		} 
 		else if (comandoDaEseguire.getNome().equals("vai"))
 			this.partita.getGiocatore().vai(comandoDaEseguire.getParametro());
+		else if(comandoDaEseguire.getNome().equals("stanza"))
+			io.mostraMessaggio(this.partita.getLabirinto().getStanzaCorrente().toString());
 		else if(comandoDaEseguire.getNome().equals("cfu"))
-			this.cfu();
+			io.mostraMessaggio("Hai " + this.partita.getGiocatore().getCfu()+" cfu");
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
 		else if (comandoDaEseguire.getNome().equals("posa"))
@@ -71,7 +73,7 @@ public class DiaDia {
 		else if (comandoDaEseguire.getNome().equals("prendi"))
 			this.partita.getGiocatore().prendi(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("borsa"))
-			this.stampaBorsa();
+			io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 		else
 			io.mostraMessaggio("Comando sconosciuto");
 
@@ -91,52 +93,12 @@ public class DiaDia {
 
 	// implementazioni dei comandi dell'utente:
 
-	private void cfu() {
-		io.mostraMessaggio("Hai " + this.partita.getGiocatore().getCfu()+" cfu");
-	}
-
-	/**
-	 * Stampa informazioni di aiuto.
-	 */
-
 	private void aiuto() {
 		for(int i=0; i< elencoComandi.length; i++) 
 			io.mostraMessaggio("- "+elencoComandi[i]);
 		io.mostraMessaggio("");
 	}
-	/**
-	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
-	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
-	 */
-	/*private void vai(String direzione) {
-		if(direzione==null) {
-			io.mostraMessaggio("Dove vuoi andare ?");
-			direzione = io.leggiRiga();
-		}
-		Stanza prossimaStanza = null;
-		prossimaStanza = this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente(direzione);
-		if (prossimaStanza == null)
-			io.mostraMessaggio("Direzione inesistente");
-		else {
-			//diminuisci cfu per spostamento
-			this.partita.getLabirinto().setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getGiocatore().getCfu();
-			cfu -= 1;
-			this.partita.getGiocatore().setCfu(cfu);
-			//se cambi stanza ma non sei in quella vincente stampa una desc.
-			if(this.partita.getLabirinto().getStanzaCorrente()!=this.partita.getLabirinto().getStanzaFinale()) {
-				io.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().getDescrizione());
-			}
-		}
 
-	} 
-	*/
-	
-	private void stampaBorsa() {
-		io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
-	}
-	
-	
 	private void fine() {
 		io.mostraMessaggio("Grazie di aver giocato!");
 	}

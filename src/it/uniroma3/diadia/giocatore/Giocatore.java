@@ -5,6 +5,15 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+
+
+/**
+ * Classe Giocatore 
+ * 
+ * @author Alfredo e Nazar
+ * @version 0.0.2.a
+ */
+
 public class Giocatore {
 	static final private int CFU_INIZIALI = 21;
 	private int cfu;
