@@ -61,8 +61,8 @@ public class Giocatore {
 					stanzaCorrente.removeAttrezzo(stanzaCorrente.getAttrezzo(attrezzoDaPrendere));
 					io.mostraMessaggio("Hai aggiunto "+ attrezzoDaPrendere + " alla borsa");
 					return true;
-				}else io.mostraMessaggio("L'attrezzo pesa troppo");
-			}else io.mostraMessaggio("Attrezzo non presente");
+				}else io.mostraMessaggio(attrezzoDaPrendere + " pesa troppo");
+			}else io.mostraMessaggio(attrezzoDaPrendere + " non presente");
 		}else io.mostraMessaggio("La borsa è piena");
 		return false;
 	}
@@ -83,7 +83,7 @@ public class Giocatore {
 						return true;
 					}
 				}else io.mostraMessaggio("La stanza è piena");
-			}else io.mostraMessaggio("Attrezzo non presente nella borsa");
+			}else io.mostraMessaggio(attrezzoDaPosare + " non presente nella borsa");
 		}else io.mostraMessaggio("La borsa è vuota");
 		return false;
 	}
