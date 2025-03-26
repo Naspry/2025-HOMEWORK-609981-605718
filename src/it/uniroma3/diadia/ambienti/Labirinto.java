@@ -1,4 +1,6 @@
-package main_package;
+package it.uniroma3.diadia.ambienti;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
 	Stanza stanzaIniziale;

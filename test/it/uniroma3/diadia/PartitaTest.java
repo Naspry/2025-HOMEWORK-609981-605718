@@ -1,23 +1,22 @@
-package main_package;
-import main_package.Partita;
-
+package it.uniroma3.diadia;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniroma3.diadia.IOConsole;
+
+import it.uniroma3.diadia.giocatore.Giocatore;
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 class PartitaTest {
 	
 	private Partita partita;
 	private Labirinto labirinto;
 	private Giocatore giocatore;
-	private IOConsole io;
+
 	
 	@BeforeEach
 	void setUp() {
-		io = new IOConsole();
-		partita = new Partita(io);  // Initialize a new game
+		partita = new Partita();  // Initialize a new game
 		labirinto = partita.getLabirinto(); // Get the labyrinth
 		giocatore = partita.getGiocatore(); // Get the player
 	}

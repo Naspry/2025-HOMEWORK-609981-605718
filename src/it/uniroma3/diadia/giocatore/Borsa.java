@@ -1,5 +1,6 @@
-package main_package;
+package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
