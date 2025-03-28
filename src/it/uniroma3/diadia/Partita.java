@@ -19,7 +19,7 @@ public class Partita {
 	private Labirinto labirinto;
 	private boolean finita;
 	
-	private IOConsole io;
+	//private IOConsole io;
 
 	public Partita(IOConsole io){
 		this.labirinto = new Labirinto();

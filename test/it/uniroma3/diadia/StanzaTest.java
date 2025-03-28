@@ -10,10 +10,22 @@ import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaTest {	
-	private Stanza stanzaVuota, stanzaPiena, stanza, stanzaDisordinata;
-	private Attrezzo quaderno, penna, orologio, libro, matita, compasso;
+	private Stanza stanzaVuota, stanzaPiena, 
+	stanza, stanzaDisordinata;
+	
+	private Attrezzo quaderno, penna, 
+	orologio, libro, matita, compasso;
 
-
+	@BeforeEach
+	void setUp() {
+		quaderno = new Attrezzo("Quaderno", 1);
+		penna = new Attrezzo("Penna", 1);
+		orologio = new Attrezzo("Orologio", 3);
+		stanza = new Stanza("N18");
+		stanza.addAttrezzo(quaderno);
+		stanza.addAttrezzo(penna);
+	}
+	
 	@BeforeEach
 	void setUpStanzaVuota() {
 		stanzaVuota = new Stanza("N18");
@@ -29,15 +41,6 @@ class StanzaTest {
 		}
 		orologio = new Attrezzo("Orologio", 3);
 	}
-	@BeforeEach
-	void setUp() {
-		quaderno = new Attrezzo("Quaderno", 1);
-		penna = new Attrezzo("Penna", 1);
-		orologio = new Attrezzo("Orologio", 3);
-		stanza = new Stanza("N18");
-		stanza.addAttrezzo(quaderno);
-		stanza.addAttrezzo(penna);
-	}
 
 	@BeforeEach
 	void setUpStanzaDisordinata() {
@@ -51,9 +54,10 @@ class StanzaTest {
 		stanzaDisordinata.addAttrezzo(null);
 		stanzaDisordinata.addAttrezzo(null);
 		stanzaDisordinata.addAttrezzo(matita);
-		
 	}
+	
 	// ------------- TEST addAttrezzo --------
+	
 	@Test
 	void testAddAttrezzoSingolo() {
 		assertTrue(stanza.addAttrezzo(quaderno), "Dovrebbe essere possibile aggiungere un attrezzo");
@@ -70,6 +74,7 @@ class StanzaTest {
 	}
 
 	// ------------- TEST removeAttrezzo --------
+	
 	@Test
 	void testRemoveStanzaConItem() {
 		assertTrue(stanza.removeAttrezzo(penna));
@@ -85,6 +90,7 @@ class StanzaTest {
 		Attrezzo att = new Attrezzo("prova", 1);
 		assertFalse(stanza.removeAttrezzo(att));
 	}
+	
 	// ------------- TEST getAttrezzi --------
 	
 	@Test
@@ -95,7 +101,6 @@ class StanzaTest {
 	    assertEquals(penna.toString(), att[1].toString());
 	}
 	
-	
 	// ------------- TEST hasAttrezzo --------
 	
 	@Test
@@ -104,10 +109,12 @@ class StanzaTest {
 		assertTrue(stanza.removeAttrezzo(quaderno));
 		assertFalse(stanza.hasAttrezzo(quaderno.getNome()),"quaderno non dovrebbe esserci più");
 	}
+	
 	@Test
 	void testHasAttrezzoNonEsistente() {
 		assertFalse(stanzaVuota.hasAttrezzo(quaderno.getNome()));
 	}
+	
 	@Test
 	void testHasAttrezzoInStanzaDisordinata() {
 		assertTrue(stanzaDisordinata.hasAttrezzo(compasso.getNome()));
