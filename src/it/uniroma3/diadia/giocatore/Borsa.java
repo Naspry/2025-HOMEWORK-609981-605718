@@ -44,8 +44,8 @@ public class Borsa {
 	}
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
-		for (int i= 0; i<this.numeroAttrezzi; i++)
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+		for (int i= 0; i<this.attrezzi.length; i++)
+			if (this.attrezzi[i] != null && this.attrezzi[i].getNome().equals(nomeAttrezzo))
 				a = attrezzi[i];
 
 		return a;
