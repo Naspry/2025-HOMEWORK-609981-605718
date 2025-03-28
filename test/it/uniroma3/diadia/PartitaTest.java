@@ -15,11 +15,12 @@ class PartitaTest {
 
 	@BeforeEach
 	void setUp() {
-		partita = new Partita(io);  
-		labirinto = partita.getLabirinto(); 
-		giocatore = partita.getGiocatore();
+		this.partita = new Partita(io);  
+		this.labirinto = partita.getLabirinto(); 
+		this.giocatore = partita.getGiocatore();
+	
 	}
-
+	
 	@Test
 	void testIsFinitaWin() {
 		// Imposta la stanza corrente in quella finale (simulando una vittoria)
