@@ -16,36 +16,28 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private int pesoMax;
-	
+
 	private Attrezzo[] attrezzi;
 	private int numeroAttrezzi;
-	
+
 	public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
 	}
-	
+
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new Attrezzo[10]; // speriamo bastino...
 		this.numeroAttrezzi = 0;
 	}
-	
+
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
 		if (this.numeroAttrezzi==attrezzi.length)
 			return false;
-		int i = 0;
-		while(i < attrezzi.length) {
-			if(attrezzi[i] == null) {
-				attrezzi[i] = attrezzo;
-				this.numeroAttrezzi++;
-				return true;
-				
-			}	
-			i++;
-		}
-		return false;
+		this.attrezzi[numeroAttrezzi] = attrezzo;
+		this.numeroAttrezzi++;
+		return true;
 	}
 	public int getPesoMax() {
 		return pesoMax;
@@ -80,9 +72,12 @@ public class Borsa {
 			return attrezzo;
 		}
 
-		for (int i = 0; i < this.attrezzi.length; i++) {
-			if (this.attrezzi[i] != null && attrezzi[i] == attrezzo){
-				this.attrezzi[i] = null; 
+		for (int i = 0; i < this.numeroAttrezzi; i++) {
+			if (attrezzi[i] == attrezzo) {
+				for(int j = i; j<numeroAttrezzi-1; j++) {
+					this.attrezzi[j] = this.attrezzi[j+1];
+				}
+				this.attrezzi[this.numeroAttrezzi - 1] = null;
 				this.numeroAttrezzi -= 1;
 				return attrezzo; 
 			} 

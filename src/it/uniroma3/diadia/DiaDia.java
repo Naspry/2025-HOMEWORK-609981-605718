@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import comandi.Comando;
+import comandi.FabbricaDiComandiFisarmonica;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -25,7 +27,6 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = {"vai", "cfu", "prendi", "posa","borsa", "fine","aiuto","stanza"};
 
 	private Partita partita;
 
@@ -53,30 +54,11 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire = new Comando(istruzione);
-		if(comandoDaEseguire.getNome() == null) return false;
+		Comando comandoDaEseguire;
+		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica(io);
 
-		if (comandoDaEseguire.getNome().equals("fine")) {
-			this.fine(); 
-			return true;
-		} 
-		else if (comandoDaEseguire.getNome().equals("vai"))
-			this.partita.getGiocatore().vai(comandoDaEseguire.getParametro());
-		else if(comandoDaEseguire.getNome().equals("stanza"))
-			io.mostraMessaggio(this.partita.getLabirinto().getStanzaCorrente().toString());
-		else if(comandoDaEseguire.getNome().equals("cfu"))
-			io.mostraMessaggio("Hai " + this.partita.getGiocatore().getCfu()+" cfu");
-		else if (comandoDaEseguire.getNome().equals("aiuto"))
-			this.aiuto();
-		else if (comandoDaEseguire.getNome().equals("posa"))
-			this.partita.getGiocatore().posa(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("prendi"))
-			this.partita.getGiocatore().prendi(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("borsa"))
-			io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
-		else
-			io.mostraMessaggio("Comando sconosciuto");
-
+		comandoDaEseguire = factory.costruisciComando(istruzione);
+		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.isFinita()) {
 			if (this.partita.isVinta() && this.partita.getGiocatore().getCfu()>0) {
 				io.mostraMessaggio("Congratulazioni, sei in "+this.partita.getLabirinto().getStanzaCorrente().getNome());
@@ -86,22 +68,9 @@ public class DiaDia {
 				io.mostraMessaggio("Mi dispiace, hai finito i cfu e hai perso!");
 			return true;
 		}
-
-
 		return false;
 	}   
 
-	// implementazioni dei comandi dell'utente:
-
-	private void aiuto() {
-		for(int i=0; i< elencoComandi.length; i++) 
-			io.mostraMessaggio("- "+elencoComandi[i]);
-		io.mostraMessaggio("");
-	}
-
-	private void fine() {
-		io.mostraMessaggio("Grazie di aver giocato!");
-	}
 
 	public static void main(String[] argc) {
 		IOConsole io = new IOConsole();

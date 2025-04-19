@@ -19,8 +19,8 @@ public class Stanza {
 
 	private String nome;
 
-	private Attrezzo[] attrezzi;
-	private int numeroAttrezzi;
+	protected Attrezzo[] attrezzi;
+	protected int numeroAttrezzi;
 
 	private Stanza[] stanzeAdiacenti;
 	private int numeroStanzeAdiacenti;
@@ -96,6 +96,11 @@ public class Stanza {
 	public Attrezzo[] getAttrezzi() {
 		return this.attrezzi;
 	}
+	
+	public boolean isFull() {
+		if(this.numeroAttrezzi == NUMERO_MASSIMO_ATTREZZI) return true;
+		return false;
+	}
 
 	/**
 	 * Mette un attrezzo nella stanza.
@@ -168,24 +173,25 @@ public class Stanza {
 
 	/**
 	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
-	 * @param nomeAttrezzo
+	 * @param attezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	public boolean removeAttrezzo(Attrezzo attrezzo) { 
-		 if (attrezzo == null) {
-		        return false;
-		    }
-
-		    for (int i = 0; i < this.numeroAttrezzi; i++) {
-		        if (this.attrezzi[i] != null && this.attrezzi[i].toString().equals(attrezzo.toString())) {
-		            this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1]; // Sostituisco con l'ultimo attrezzo
-		            this.attrezzi[this.numeroAttrezzi - 1] = null; // Cancello l'ultimo elemento
-		            this.numeroAttrezzi--; // Riduco il numero di attrezzi
-		            return true;
-		        }
-		    }
-
-		    return false;
+	
+	public boolean removeAttrezzo(Attrezzo attrezzo) {
+		if(attrezzo == null) return false;
+		for(int i=0; i<this.numeroAttrezzi; i++) {
+			if(this.attrezzi[i].getNome().equals(attrezzo.getNome())) {  //trovo l'attrezzo nella stanza
+				for(int j = i; j<numeroAttrezzi; j++) {
+					attrezzi[j] = attrezzi[j+1];			//scorro l'array a sinistra di 1 posto
+				}
+				 // Imposta l'ultimo elemento a null
+	            this.attrezzi[this.numeroAttrezzi - 1] = null;
+				this.numeroAttrezzi--;
+				return true;
+			}
+		}
+		return false;			//non trovo l'attrezzo nella stanza
+			
 	}
 
 

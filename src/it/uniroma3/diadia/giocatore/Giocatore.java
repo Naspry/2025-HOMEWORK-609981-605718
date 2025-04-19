@@ -56,26 +56,6 @@ public class Giocatore {
 
 	} 
 
-	public boolean prendi(String attrezzoDaPrendere) {
-		if(attrezzoDaPrendere == null) {
-			io.mostraMessaggio("Quale attrezzo vuoi prendere?");
-			attrezzoDaPrendere = io.leggiRiga();
-		}
-		Stanza stanzaCorrente = labirinto.getStanzaCorrente();
-		if(!borsa.isFull()) {
-			if(stanzaCorrente.hasAttrezzo(attrezzoDaPrendere)) {
-				Attrezzo att = stanzaCorrente.getAttrezzo(attrezzoDaPrendere);
-				if(borsa.getPeso() + att.getPeso() < borsa.getPesoMax()) {
-					borsa.addAttrezzo(att);
-					stanzaCorrente.removeAttrezzo(stanzaCorrente.getAttrezzo(attrezzoDaPrendere));
-					io.mostraMessaggio("Hai aggiunto "+ attrezzoDaPrendere + " alla borsa");
-					return true;
-				}else io.mostraMessaggio(attrezzoDaPrendere + " pesa troppo");
-			}else io.mostraMessaggio(attrezzoDaPrendere + " non presente");
-		}else io.mostraMessaggio("La borsa è piena");
-		return false;
-	}
-
 	public boolean posa(String attrezzoDaPosare) {
 		if(attrezzoDaPosare == null) {
 			io.mostraMessaggio("Quale attrezzo vuoi posare?");
