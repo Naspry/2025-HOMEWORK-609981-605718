@@ -1,12 +1,12 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoGuarda implements Comando {
-	private IOConsole io;
+	private IO io;
 	
-	public ComandoGuarda(IOConsole io) {
+	public ComandoGuarda(IO io) {
 		this.io = io;
 	}
 	@Override

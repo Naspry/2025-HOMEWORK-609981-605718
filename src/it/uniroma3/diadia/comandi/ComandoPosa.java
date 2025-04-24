@@ -1,16 +1,16 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa implements Comando {
-	private IOConsole io;
+	private IO io;
 	String attrezzoDaPosare;
 	
-	public ComandoPosa(IOConsole io) {
+	public ComandoPosa(IO io) {
 		this.io = io;
 	}
 	@Override

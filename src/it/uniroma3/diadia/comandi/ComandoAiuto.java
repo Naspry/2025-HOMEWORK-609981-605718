@@ -1,17 +1,17 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoAiuto implements Comando{
-	private IOConsole io;
+	private IO io;
 	
-	public ComandoAiuto(IOConsole io) {
+	public ComandoAiuto(IO io) {
 		this.io = io;
 	}
 	@Override
 	public void esegui(Partita partita) {
-		io.mostraMessaggio("Lista comandi: [aiuto, fine, vai, prendi, posa, guarda]");
+		io.mostraMessaggio("Lista comandi: [aiuto, fine, vai, prendi, posa, guarda, borsa]");
 		
 	}
 

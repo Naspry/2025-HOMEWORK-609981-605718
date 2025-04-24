@@ -5,9 +5,9 @@ import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai implements Comando {
 	private String direzione;
-	private IOConsole io;
+	private IO io;
 	
-	public ComandoVai(IOConsole io) {
+	public ComandoVai(IO io) {
 		this.io = io;
 	}
 	

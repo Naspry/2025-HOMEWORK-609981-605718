@@ -21,7 +21,7 @@ public class Partita {
 	
 	//private IOConsole io;
 
-	public Partita(IOConsole io){
+	public Partita(IO io){
 		this.labirinto = new Labirinto();
 		this.giocatore = new Giocatore(labirinto, io);
 		this.finita = false;
