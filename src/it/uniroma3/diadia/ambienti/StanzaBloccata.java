@@ -15,12 +15,12 @@ public class StanzaBloccata extends Stanza{
 
 	@Override
 	public Stanza getStanzaAdiacente(String dir) {
-
-		if(this.hasAttrezzo(attrezzoRichiesto)) 
+		if(dir.equals(direzioneBloccata) && this.hasAttrezzo(attrezzoRichiesto))
+			return super.getStanzaAdiacente(dir);
+		else if(!dir.equals(direzioneBloccata))
 			return super.getStanzaAdiacente(dir);
 		else
 			return this;
-
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class StanzaBloccata extends Stanza{
 			if(attrezzo != null)
 				risultato.append(attrezzo.toString()+" ");
 		}
-		risultato.append("\n L'attrezzo per sbloccare la stanza " + direzioneBloccata +
+		risultato.append("\nL'attrezzo per sbloccare la stanza " + direzioneBloccata +
 				" è: "+ attrezzoRichiesto);
 		return risultato.toString();
 	}
