@@ -5,6 +5,39 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * aggiungendo in ogni stanza i relativi attrezzi.
  * Setta lo spawn del giocatore e la stanza vincente.
  *
+ * Mappa del labirinto
+ 
+							+---------------------+
+                            | Biblioteca (Finale) |
+                            +----------^----------+
+                                       | Nord / Sud
+                                       |
+    +------------+     Ovest / Est   +---------------------+
+    | N3 (Buia)  | <---------------- | N9 (Magica)         |
+    +------------+                   +----------^----------+
+                                                | Nord / Sud  (Uscita NORD da Bagno è BLOCCATA senza 'chiave')
+                                                |
+                                          +---------------------+
+                                          | Bagno               |
+                                          +--------^------------+
+                                                   | Nord / Sud
+                                                   |
+                                    +--------------------------------+
+                                    | N2 (Buia - richiede 'lanterna') |
+                                    +--------------^------------------+
+                                                   | Nord / Sud
+                                                   |
+    +----------------+    Ovest / Est   +---------------------+     Ovest / Est   +---------------------+
+    | Aula N10       | <-------------- | Aula N11            | <---------------- | Laboratorio Campus  |
+    | (lanterna - 3) |                 | (chiave - 1)        |                   |                     |
+    +----------------+                 +---------------------+                   +----------^----------+
+                                                                                            | Nord / Sud
+                                                                                            |
+                                                                                      +---------------------+
+                                                                                      | Atrio (Iniziale)    |
+                                                                                      | (osso - 1)          |
+                                                                                      +---------------------+
+	 
  *
  * @author  Alfredo e Nazar
  * @see partita        
@@ -37,6 +70,7 @@ public class Labirinto {
 		this.stanzaFinale = stanzaFinale;
 	}
 	
+	
 	private void creaStanze() {
 	    /* crea gli attrezzi */
 	    Attrezzo lanterna = new Attrezzo("lanterna", 3); // torcia per N2
@@ -58,15 +92,15 @@ public class Labirinto {
 	    atrio.impostaStanzaAdiacente("nord", laboratorio);
 
 	    laboratorio.impostaStanzaAdiacente("sud", atrio);
-	    laboratorio.impostaStanzaAdiacente("est", aulaN11);
-	    laboratorio.impostaStanzaAdiacente("nord", N2);
+	    laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
 
-	    aulaN11.impostaStanzaAdiacente("ovest", laboratorio);
-	    aulaN11.impostaStanzaAdiacente("est", aulaN10);
+	    aulaN11.impostaStanzaAdiacente("est", laboratorio);
+	    aulaN11.impostaStanzaAdiacente("ovest", aulaN10);
+	    aulaN11.impostaStanzaAdiacente("nord", N2);
 
-	    aulaN10.impostaStanzaAdiacente("ovest", aulaN11);
+	    aulaN10.impostaStanzaAdiacente("est", aulaN11);
 
-	    N2.impostaStanzaAdiacente("sud", laboratorio);
+	    N2.impostaStanzaAdiacente("sud", aulaN11);
 	    N2.impostaStanzaAdiacente("nord", bagno);
 
 	    bagno.impostaStanzaAdiacente("sud", N2);
