@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class IOSimulator implements IO {
 
+	private String[] Comandi;
+	
+
+	
 	@Override
 	public void mostraMessaggio(String messaggio) {
 		System.out.println(messaggio);
