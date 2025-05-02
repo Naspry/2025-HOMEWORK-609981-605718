@@ -108,7 +108,7 @@ public class Labirinto {
 
 	    N9.impostaStanzaAdiacente("sud", bagno);
 	    N9.impostaStanzaAdiacente("nord", biblioteca);
-	    N9.impostaStanzaAdiacente("est", N3);
+	    N9.impostaStanzaAdiacente("ovest", N3);
 
 	    N3.impostaStanzaAdiacente("ovest", N9);
 

@@ -1,25 +1,28 @@
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
-
 public class IOSimulator implements IO {
 
-	private String[] Comandi;
-	
+	private String[] comandi;
+	int i = 0;
 
-	
+	public IOSimulator(String[] comandi) {
+		this.comandi = comandi;
+	}
+
+
 	@Override
 	public void mostraMessaggio(String messaggio) {
 		System.out.println(messaggio);
+		System.out.println("----------------------------------------");
+	
 	}
 
 	@Override
 	public String leggiRiga() {
-		@SuppressWarnings("resource")
-		Scanner scannerDiLinee = new Scanner(System.in);
-		String riga = scannerDiLinee.nextLine();
-		// scannerDiLinee.close();
-		return riga;
-	}
+		if(i<comandi.length) {
+			return this.comandi[i++];
+		}
+		return null;
 
+	}
 }
