@@ -3,6 +3,8 @@ package it.uniroma3.diadia;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,10 +97,10 @@ class StanzaTest {
 	
 	@Test
 	void testGetAttrezzi() {
-	    Attrezzo[] att = stanza.getAttrezzi();
+	    List<Attrezzo> att = stanza.getAttrezzi();
 	    
-	    assertEquals(quaderno.toString(), att[0].toString());
-	    assertEquals(penna.toString(), att[1].toString());
+	    assertEquals(quaderno.toString(), att.get(0).toString());
+	    assertEquals(penna.toString(), att.get(1).toString());
 	}
 	
 	// ------------- TEST hasAttrezzo --------

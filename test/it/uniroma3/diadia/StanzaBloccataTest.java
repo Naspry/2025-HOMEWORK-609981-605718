@@ -2,6 +2,8 @@ package it.uniroma3.diadia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,11 +23,18 @@ class StanzaBloccataTest {
 		stanzaBloccata.impostaStanzaAdiacente("est", stanzaEffettivamenteBloccata);
 		stanzaBloccata.impostaStanzaAdiacente("nord", stanza2);
 	}
+	void testStampaDirezioni() {
+		Set<String> direzioni = stanzaBloccata.getDirezioni();
+		assertTrue(direzioni.contains("est"));
+		assertTrue(direzioni.contains("nord"));
+		assertEquals(2, direzioni.size());
+	}
+	/*
 	@Test
 	void testStampaDirezioni() {
 		assertEquals("est", stanzaBloccata.getDirezioni()[0]);
 		assertEquals("nord", stanzaBloccata.getDirezioni()[1]);
-	}
+	}*/
 	@Test
 	void testAccessoSenzaAttrezzo() {
 		assertEquals(stanzaBloccata, stanzaBloccata.getStanzaAdiacente("est"));

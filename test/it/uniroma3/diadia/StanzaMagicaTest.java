@@ -32,7 +32,7 @@ class StanzaMagicaTest {
 	void testComportamentoMagico() {
 		stanzaMagicaSoglia.addAttrezzo(pepe);
 		assertTrue(stanzaMagicaSoglia.hasAttrezzo("epep"), "deve invertire 'pepe'");
-		assertEquals(2, stanzaMagicaSoglia.getAttrezzi()[3].getPeso(),"pepe ora pesa il doppio");
+		assertEquals(2, stanzaMagicaSoglia.getAttrezzi().get(3).getPeso(),"pepe ora pesa il doppio");
 		assertTrue(stanzaMagicaSoglia.getNumeroAttrezzi() == 4, "deve incrementare in numero degli attrezzi");
 		stanzaMagicaVuota.addAttrezzo(corda);
 		assertFalse(stanzaMagicaVuota.hasAttrezzo("adroc"), "la soglia non è stata superata" );
