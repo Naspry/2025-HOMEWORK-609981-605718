@@ -1,5 +1,9 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
@@ -17,8 +21,7 @@ public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private int pesoMax;
 
-	private Attrezzo[] attrezzi;
-	private int numeroAttrezzi;
+	private List<Attrezzo> attrezzi;
 
 	public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
@@ -26,74 +29,72 @@ public class Borsa {
 
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new Attrezzo[10]; // speriamo bastino...
-		this.numeroAttrezzi = 0;
+		this.attrezzi = new ArrayList<Attrezzo>();
 	}
 
 	public boolean addAttrezzo(Attrezzo attrezzo) {
+		if(attrezzo == null) return false;
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
-		if (this.numeroAttrezzi==attrezzi.length)
-			return false;
-		this.attrezzi[numeroAttrezzi] = attrezzo;
-		this.numeroAttrezzi++;
-		return true;
+	
+		return this.attrezzi.add(attrezzo);
 	}
+	
 	public int getPesoMax() {
 		return pesoMax;
 	}
+	
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		Attrezzo a = null;
-		for (int i= 0; i<this.attrezzi.length; i++)
-			if (this.attrezzi[i] != null && this.attrezzi[i].getNome().equals(nomeAttrezzo))
-				a = attrezzi[i];
-
-		return a;
+		for(Attrezzo a: attrezzi) {
+			if(a.getNome().equals(nomeAttrezzo)) {
+				return a;
+			}
+		}
+		return null;
 	}
+	
 	public int getPeso() {
 		int peso = 0;
-		for (int i= 0; i<this.attrezzi.length; i++) {
-			if(this.attrezzi[i] != null)
-				peso += this.attrezzi[i].getPeso();
+		for(Attrezzo a: attrezzi) {
+			peso += a.getPeso();
 		}
 		return peso;
 	}
 	public boolean isEmpty() {
-		return this.numeroAttrezzi == 0;
+		return this.attrezzi.size() == 0;
 	}
 	public boolean isFull() {
-		return this.numeroAttrezzi == 10;
+		return this.getPeso() >= this.pesoMax;
 	}
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return this.getAttrezzo(nomeAttrezzo)!=null;
 	}
-	public Attrezzo removeAttrezzo(Attrezzo attrezzo) { 
-		if (attrezzo == null) {
-			return attrezzo;
+	
+	public Attrezzo removeAttrezzo(Attrezzo attrezzo) {
+		
+		Iterator<Attrezzo> it = attrezzi.iterator();
+		
+		while(it.hasNext()) {
+			Attrezzo a = it.next();
+			if(a.equals(attrezzo)) {
+				it.remove();
+				return a;
+			}
 		}
-
-		for (int i = 0; i < this.numeroAttrezzi; i++) {
-			if (attrezzi[i] == attrezzo) {
-				for(int j = i; j<numeroAttrezzi-1; j++) {
-					this.attrezzi[j] = this.attrezzi[j+1];
-				}
-				this.attrezzi[this.numeroAttrezzi - 1] = null;
-				this.numeroAttrezzi -= 1;
-				return attrezzo; 
-			} 
-		}
-
-		return attrezzo; 
+		
+		return null;
+		
 	}
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-
+		Iterator<Attrezzo> it = attrezzi.iterator();
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-			for (int i= 0; i<this.attrezzi.length; i++) {
-				if(attrezzi[i] != null)
-					s.append(attrezzi[i].toString()+" ");
-			}	
+			
+			while(it.hasNext()) {
+				s.append(it.next().toString()+" ");
+			}
 		}
 		else
 			s.append("Borsa vuota");
