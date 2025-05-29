@@ -52,4 +52,8 @@ public class Partita {
 		return this.labirinto.getStanzaCorrente() == this.labirinto.getStanzaFinale();
 	}
 
+	public Stanza getStanzaCorrente() {
+		return this.labirinto.getStanzaCorrente();
+	}
+
 }

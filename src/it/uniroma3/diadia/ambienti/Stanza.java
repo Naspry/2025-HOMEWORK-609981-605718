@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 import java.util.*;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -22,7 +23,7 @@ public class Stanza {
 	private List<Attrezzo> attrezzi;
 	private Map<String,Stanza> stanzeAdiacenti;
 
-
+	private AbstractPersonaggio personaggio;
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
 	 * @param nome il nome della stanza
@@ -31,6 +32,14 @@ public class Stanza {
 		this.nome = nome;
 		this.stanzeAdiacenti = new HashMap<>();
 		this.attrezzi = new ArrayList<>();
+	}
+
+
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
 	}
 
 	/**
@@ -74,7 +83,7 @@ public class Stanza {
 	public List<Attrezzo> getAttrezzi() {
 		return this.attrezzi;
 	}
-	
+
 	public boolean isFull() {
 		if(this.getNumeroAttrezzi() == NUMERO_MASSIMO_ATTREZZI) return true;
 		return false;
@@ -151,7 +160,7 @@ public class Stanza {
 	 * @param attezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	
+
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
 		if(attrezzo == null) return false;
 		for(Attrezzo a: attrezzi) {
@@ -159,7 +168,7 @@ public class Stanza {
 				return attrezzi.remove(a);
 		}
 		return false;			//non trovo l'attrezzo nella stanza
-			
+
 	}
 
 
