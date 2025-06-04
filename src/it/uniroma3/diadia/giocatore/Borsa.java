@@ -1,7 +1,14 @@
 package it.uniroma3.diadia.giocatore;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -86,6 +93,10 @@ public class Borsa {
 		
 	}
 	
+	
+	
+	
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		Iterator<Attrezzo> it = attrezzi.iterator();
@@ -101,4 +112,41 @@ public class Borsa {
 		return s.toString();
 	}
 
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		Set<Attrezzo> ordinati = new TreeSet<>(new Comparator<Attrezzo>() {
+			@Override
+			public int compare(Attrezzo a1, Attrezzo a2) {
+				int diffPeso = a1.getPeso() - a2.getPeso();
+				if(diffPeso != 0) return diffPeso;
+				return a1.getNome().compareTo(a2.getNome());
+			}
+		});
+		ordinati.addAll(attrezzi);
+		return new ArrayList<>(ordinati);
+	}
+	
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		SortedSet<Attrezzo> ordinati = new TreeSet<>(new Comparator<Attrezzo>() {
+			@Override
+			public int compare(Attrezzo a1, Attrezzo a2) {
+				if(a1.getNome().equals(a2.getNome())) return a1.getPeso() - a2.getPeso();
+				return a1.getNome().compareTo(a2.getNome());
+			}
+		});
+		ordinati.addAll(attrezzi);
+		return ordinati;
+	}
+	
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		Map<Integer, Set<Attrezzo>> map = new HashMap<>();
+		
+		for(Attrezzo a: attrezzi) {
+			if(!map.containsKey(a.getPeso())) {
+				map.put(a.getPeso(), new HashSet<Attrezzo>());
+			}
+			map.get(a.getPeso()).add(a);
+		}
+		
+		return map;
+	}
 }

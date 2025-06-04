@@ -5,7 +5,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando {
 	private IO io;
 	String attrezzoDaPrendere;
 
@@ -30,15 +30,6 @@ public class ComandoPrendi implements Comando {
 			}else io.mostraMessaggio(attrezzoDaPrendere + " non presente");
 		}else io.mostraMessaggio("La borsa è piena");
 		return;
-	}
-
-
-
-
-	@Override
-	public void setParametro(String parametro) {
-		this.attrezzoDaPrendere = parametro;
-
 	}
 
 }

@@ -22,15 +22,23 @@ public class Partita {
 	//private IOConsole io;
 
 	public Partita(IO io){
-		this.labirinto = new Labirinto();
 		this.giocatore = new Giocatore();
+		this.labirinto = new Labirinto();
 		this.finita = false;
+	}
+	public Partita(IO io, Labirinto labirinto){
+	    this.giocatore = new Giocatore();
+	    this.labirinto = labirinto;
+	    this.finita = false;
 	}
 
 	/**
 	 * Restituisce vero se e solo se la partita e' finita
 	 * @return vero se partita finita
 	 */
+	public void setLabirinto(Labirinto lab) {
+		this.labirinto = lab;
+	}
 	
 	public Labirinto getLabirinto() {
 		return this.labirinto;

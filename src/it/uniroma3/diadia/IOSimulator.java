@@ -1,15 +1,20 @@
 package it.uniroma3.diadia;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 public class IOSimulator implements IO {
 
-	private String[] comandi;
+	private List<String> comandi;
 	int i = 0;
 	
 	final String ANSI_RESET = "\u001B[0m";
 	final String ANSI_GREEN = "\u001B[32m";
 
-	public IOSimulator(String[] comandi) {
-		this.comandi = comandi;
+	public IOSimulator(LinkedList<String> vittoria) {
+		this.comandi = vittoria;
 	}
 
 
@@ -19,14 +24,14 @@ public class IOSimulator implements IO {
 		
 	
 	}
-
 	@Override
 	public String leggiRiga() {
-		if(i<comandi.length) {
-			this.mostraMessaggio(ANSI_GREEN + comandi[i] + ANSI_RESET);
-			return this.comandi[i++];
-		}
-		return null;
-
+	    if (i < comandi.size()) {
+	        String s = comandi.get(i++);
+	        this.mostraMessaggio(ANSI_GREEN + s + ANSI_RESET);
+	        return s;
+	    }
+	    return null;
 	}
+
 }

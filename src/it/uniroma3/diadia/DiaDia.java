@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
@@ -29,26 +31,28 @@ public class DiaDia {
 
 
 	private Partita partita;
-
 	private IO io;
+	
 
-
-	public DiaDia(IO io) {
+	public DiaDia(Labirinto labirinto, IO io) {
 		this.partita = new Partita(io);
+		this.partita.setLabirinto(labirinto);
 		this.io = io;
 	}
 
 	public void gioca() {
-		String istruzione;
-		io.mostraMessaggio(MESSAGGIO_BENVENUTO);	
+	    String istruzione;
+	    io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 
-		do		
-			istruzione = io.leggiRiga();
-		while (!processaIstruzione(istruzione));
-	}   
-	public Partita getPartita() {
-		return this.partita;
+	    do {
+	        istruzione = io.leggiRiga();
+	        if (istruzione == null) {
+	            
+	            break;
+	        }
+	    } while (!processaIstruzione(istruzione));
 	}
+
 
 
 	/**
@@ -66,7 +70,12 @@ public class DiaDia {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		comandoDaEseguire.esegui(this.partita);
+		if (comandoDaEseguire != null) {
+			comandoDaEseguire.esegui(this.partita);
+		} else {
+			io.mostraMessaggio("Comando non riconosciuto.");
+		}
+
 		if (this.partita.isFinita()) {
 			if (this.partita.isVinta() && this.partita.getGiocatore().getCfu()>0) {
 				io.mostraMessaggio("Congratulazioni, sei in "+this.partita.getLabirinto().getStanzaCorrente().getNome());
@@ -82,7 +91,16 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("LabCampusOne")
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("LabCampusOne","Biblioteca","ovest")
+				.getLabirinto();
+				DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
+	}
+
+	public Partita getPartita() {
+		return partita;
 	}
 }

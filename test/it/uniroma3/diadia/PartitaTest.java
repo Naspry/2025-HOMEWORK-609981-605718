@@ -15,11 +15,12 @@ class PartitaTest {
 
 	@BeforeEach
 	void setUp() {
-		this.partita = new Partita(io);  
-		this.labirinto = partita.getLabirinto(); 
-		this.giocatore = partita.getGiocatore();
-	
+	    this.labirinto = new Labirinto();
+	    this.io = new IOConsole();
+	    this.partita = new Partita(io, labirinto);
+	    this.giocatore = partita.getGiocatore();
 	}
+
 	
 	@Test
 	void testIsFinitaWin() {

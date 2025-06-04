@@ -2,7 +2,15 @@ package it.uniroma3.diadia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 class IOSimulatorTest {
 	
@@ -11,17 +19,35 @@ class IOSimulatorTest {
 	
 	@Test
 	void testVittoria() {
-		String vittoria[] = {
-				"vai nord", "vai ovest", "prendi chiave", "vai ovest", 
-				"prendi lanterna", "vai est", "vai nord", "posa lanterna", "guarda",
-				"vai nord", "posa chiave", "vai nord", "vai nord"
-				};
+		io = new IOSimulator(new LinkedList<>(List.of(
+			    "vai nord", "vai ovest", "prendi chiave", "vai ovest", 
+			    "prendi lanterna", "vai est", "vai nord", "posa lanterna", "guarda",
+			    "vai nord", "posa chiave", "vai nord", "vai nord"
+			)));
+
+
+		Labirinto labirinto = new LabirintoBuilder()
+			.addStanzaIniziale("Atrio").addAttrezzo("osso", 1)
+			.addStanza("Laboratorio Campus").addAdiacenza("Atrio", "Laboratorio Campus", "nord")
+			.addStanza("Aula N11").addAttrezzo("chiave", 1).addAdiacenza("Laboratorio Campus", "Aula N11", "ovest")
+			.addStanza("Aula N10").addAttrezzo("lanterna", 3).addAdiacenza("Aula N11", "Aula N10", "ovest")
+			.addAdiacenza("Aula N10", "Aula N11", "est")
+			.addStanza("N2").addAdiacenza("Aula N11", "N2", "nord")
+			.addAdiacenza("N2", "Aula N11", "sud")
+			.addStanza("Bagno").addAdiacenza("N2", "Bagno", "nord")
+			.addAdiacenza("Bagno", "N2", "sud")
+			.addStanza("N9").addAdiacenza("Bagno", "N9", "nord")
+			.addAdiacenza("N9", "Bagno", "sud")
+			.addStanza("N3").addAdiacenza("N9", "N3", "ovest")
+			.addStanzaVincente("Biblioteca").addAdiacenza("N9", "Biblioteca", "nord")
+			.addAdiacenza("Biblioteca", "N9", "sud")
+			.getLabirinto();
 		
-		io = new IOSimulator(vittoria);
-		gioco = new DiaDia(io);
+		gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
 		
 		assertTrue(gioco.getPartita().isVinta());
 	}
+
 
 }

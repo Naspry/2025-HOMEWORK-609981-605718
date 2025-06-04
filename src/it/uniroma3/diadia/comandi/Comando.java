@@ -20,7 +20,6 @@ public interface Comando {
 	 */
 	public void esegui(Partita partita);
 
-
 	/**
 	 * set parametro del comando
 	 */

@@ -1,4 +1,8 @@
 package it.uniroma3.diadia.ambienti;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 /**
  * Classe che crea il labirinto iniziale della partita,
@@ -48,8 +52,10 @@ public class Labirinto {
 	Stanza stanzaIniziale;
 	Stanza stanzaFinale;
 	Stanza stanzaCorrente;
+	Set<Stanza> stanze;
 	
 	public Labirinto() {
+		this.stanze = new HashSet<>();
 		creaStanze();
 	}
 	
@@ -88,6 +94,18 @@ public class Labirinto {
 	    StanzaBuia N3 = new StanzaBuia("N3", null); // sempre buia
 	    Stanza biblioteca = new Stanza("Biblioteca");
 
+	    
+	    stanze.add(atrio);
+	    stanze.add(aulaN10);
+	    stanze.add(aulaN11);
+	    stanze.add(laboratorio);
+	    stanze.add(N2);
+	    stanze.add(bagno);
+	    stanze.add(N9);
+	    stanze.add(N3);
+	    stanze.add(biblioteca);
+	    //...
+
 	    /* collega le stanze */
 	    atrio.impostaStanzaAdiacente("nord", laboratorio);
 
@@ -124,5 +142,9 @@ public class Labirinto {
 	    this.stanzaCorrente = this.stanzaIniziale;
 	    this.stanzaFinale = biblioteca;
 	}
-
+	
+	public Set<Stanza> getStanze(){
+		return stanze;
+	}
+	
 }
