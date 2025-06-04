@@ -16,7 +16,7 @@ public class LabirintoBuilder {
     public LabirintoBuilder addStanzaIniziale(String nome) {
         Stanza s = new Stanza(nome);
         this.labirinto.setStanzaCorrente(s);
-        this.labirinto.getStanze().add(s); // <- AGGIUNTA IMPORTANTE
+        this.labirinto.getStanze().add(s); 
         this.stanzaCorrente = s;
         return this;
     }

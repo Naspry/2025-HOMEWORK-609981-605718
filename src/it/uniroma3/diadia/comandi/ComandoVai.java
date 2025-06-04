@@ -14,6 +14,7 @@ public class ComandoVai extends AbstractComando {
 	public void esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();	
 		Stanza prossimaStanza = null;
+		this.direzione = getParametro();
 		if(this.direzione == null) {
 			getIO().mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
 			return;

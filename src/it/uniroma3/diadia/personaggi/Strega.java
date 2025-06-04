@@ -7,62 +7,59 @@ import java.util.Set;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class Strega extends AbstractPersonaggio{
+public class Strega extends AbstractPersonaggio {
 
-	final static private String MSG_BUONO = "che culo";
-	final static private String MSG_CATTIVO = "ti ha detto male";
+    final static private String MSG_BUONO = "che culo";
+    final static private String MSG_CATTIVO = "ti ha detto male";
 
-	public Strega(String nome, String presentaz) {
-		super(nome, presentaz);
-	}
+    public Strega(String nome, String presentaz) {
+        super(nome, presentaz);
+    }
+
+    @Override
+    public String interagisci(Partita p) {
+        Set<String> direzioni = p.getStanzaCorrente().getDirezioni();
+
+        if (direzioni.isEmpty())
+            return "Nessuna stanza adiacente.";
+
+        String direzioneTarget = null;
+
+        if (this.haSalutato()) {
+            // Cerca la stanza adiacente con più attrezzi
+            int maxAttrezzi = -1;
+            for (String dir : direzioni) {
+                int numAttrezzi = p.getStanzaCorrente().getStanzaAdiacente(dir).getAttrezzi().size();
+                if (numAttrezzi > maxAttrezzi) {
+                    maxAttrezzi = numAttrezzi;
+                    direzioneTarget = dir;
+                }
+            }
+            p.getLabirinto().setStanzaCorrente(p.getStanzaCorrente().getStanzaAdiacente(direzioneTarget));
+            return MSG_BUONO;
+        } else {
+            // Cerca la stanza adiacente con meno attrezzi
+            int minAttrezzi = Integer.MAX_VALUE;
+            for (String dir : direzioni) {
+                int numAttrezzi = p.getStanzaCorrente().getStanzaAdiacente(dir).getAttrezzi().size();
+                if (numAttrezzi < minAttrezzi) {
+                    minAttrezzi = numAttrezzi;
+                    direzioneTarget = dir;
+                }
+            }
+            p.getLabirinto().setStanzaCorrente(p.getStanzaCorrente().getStanzaAdiacente(direzioneTarget));
+            return MSG_CATTIVO;
+        }
+    }
+
 
 	@Override
-	public String interagisci(Partita p) {
-
-		if(super.haSalutato() == true) {
-			//trova stanza con maggior numero di item vicino a lui
-			Set<String> dir = p.getStanzaCorrente().getDirezioni();
-			if(dir.size() == 1) {  //se solo 1 stanza adiacente (dead-end)
-				Iterator<String> it = dir.iterator();
-				p.getLabirinto().setStanzaCorrente(p.getStanzaCorrente().getStanzaAdiacente(it.next()));
-				return MSG_BUONO;
-			}
-			int max = -1;
-			String dirMax = null;
-			List<Attrezzo> att;
-			for(String d: dir) {
-				att = p.getStanzaCorrente().getStanzaAdiacente(d).getAttrezzi();
-				if(att.size() > max) { 
-					max = att.size();
-					dirMax = d;
-				}
-			}
-
-			//teletrasporta personaggio in stanza in dirMax
-			p.getLabirinto().setStanzaCorrente(p.getStanzaCorrente().getStanzaAdiacente(dirMax));
-			return MSG_BUONO;
-		}else {
-			Set<String> dir = p.getStanzaCorrente().getDirezioni();
-			Iterator<String> it = dir.iterator();
-			if(dir.size() == 1) {  //se solo 1 stanza adiacente (dead-end)
-				p.getLabirinto().setStanzaCorrente(p.getStanzaCorrente().getStanzaAdiacente(it.next()));
-				return MSG_BUONO;
-			}
-
-			int min = Integer.MAX_VALUE;
-			String dirMin = null;
-			for(String d : dir) {
-				int numAtt = p.getStanzaCorrente().getStanzaAdiacente(d).getNumeroAttrezzi();
-				if(numAtt < min) {
-					min = numAtt;
-					dirMin = d;
-				}
-			}
-
-			//teletrasporta personaggio in stanza in dirMin
-			p.getLabirinto().setStanzaCorrente(p.getStanzaCorrente().getStanzaAdiacente(dirMin));
-			return MSG_CATTIVO;
-		}
-
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		
+		partita.getGiocatore().getBorsa().removeAttrezzo(attrezzo);
+		saluta();
+		Attrezzo att = new Attrezzo("Wand", 20);
+		interagisci(partita);
+		return null;
 	}
 }

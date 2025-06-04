@@ -7,8 +7,8 @@ public abstract class AbstractComando implements Comando {
     private IO io;
     
     @Override
-    public void setParametro(String param) {
-    	this.parametro = param;
+    public void setParametro(String parametro) {
+    	this.parametro = parametro;
     }
     
     public String getParametro() {

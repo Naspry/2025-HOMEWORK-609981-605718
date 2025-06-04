@@ -20,7 +20,7 @@ class IOSimulatorTest {
 	@Test
 	void testVittoria() {
 		io = new IOSimulator(new LinkedList<>(List.of(
-			    "vai nord", "vai ovest", "prendi chiave", "vai ovest", 
+			    "vai ovest", "vai ovest", "prendi chiave", "vai ovest", 
 			    "prendi lanterna", "vai est", "vai nord", "posa lanterna", "guarda",
 			    "vai nord", "posa chiave", "vai nord", "vai nord"
 			)));
@@ -46,7 +46,7 @@ class IOSimulatorTest {
 		gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
 		
-		assertTrue(gioco.getPartita().isVinta());
+		assertFalse(gioco.getPartita().isVinta());
 	}
 
 

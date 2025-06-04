@@ -10,7 +10,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * Setta lo spawn del giocatore e la stanza vincente.
  *
  * Mappa del labirinto
- 
+
 							+---------------------+
                             | Biblioteca (Finale) |
                             +----------^----------+
@@ -41,7 +41,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
                                                                                       | Atrio (Iniziale)    |
                                                                                       | (osso - 1)          |
                                                                                       +---------------------+
-	 
+
  *
  * @author  Alfredo e Nazar
  * @see partita        
@@ -53,12 +53,19 @@ public class Labirinto {
 	Stanza stanzaFinale;
 	Stanza stanzaCorrente;
 	Set<Stanza> stanze;
-	
-	public Labirinto() {
+
+
+	public Labirinto(String nomeFile) {
+		CaricatoreLabirinto c = new CaricatoreLabirinto(nomeFile);
+		c.carica();
+		this.stanzaIniziale = c.getStanzaIniziale();
+		this.stanzaFinale = c.getStanzaVincente();
+
 		this.stanze = new HashSet<>();
 		creaStanze();
+
 	}
-	
+
 	public Stanza getStanzaCorrente() {
 		return stanzaCorrente;
 	}
@@ -67,84 +74,84 @@ public class Labirinto {
 		this.stanzaCorrente = stanzaCorrente;
 	}
 
-	
+
 	public Stanza getStanzaFinale() {
 		return this.stanzaFinale;
 	}
-	
+
 	public void setStanzaFinale(Stanza stanzaFinale) {
 		this.stanzaFinale = stanzaFinale;
 	}
-	
-	
+
+
 	private void creaStanze() {
-	    /* crea gli attrezzi */
-	    Attrezzo lanterna = new Attrezzo("lanterna", 3); // torcia per N2
-	    Attrezzo osso = new Attrezzo("osso", 1);
-	    Attrezzo chiave = new Attrezzo("chiave", 1);
+		/* crea gli attrezzi */
+		Attrezzo lanterna = new Attrezzo("lanterna", 3); // torcia per N2
+		Attrezzo osso = new Attrezzo("osso", 1);
+		Attrezzo chiave = new Attrezzo("chiave", 1);
 
-	    /* crea stanze del labirinto */
-	    Stanza atrio = new Stanza("Atrio");
-	    Stanza aulaN10 = new Stanza("Aula N10");
-	    Stanza aulaN11 = new Stanza("Aula N11");
-	    Stanza laboratorio = new Stanza("Laboratorio Campus");
-	    StanzaBuia N2 = new StanzaBuia("N2", "lanterna");
-	    StanzaBloccata bagno = new StanzaBloccata("Bagno", "nord", "chiave");
-	    StanzaMagica N9 = new StanzaMagica("N9");
-	    StanzaBuia N3 = new StanzaBuia("N3", null); // sempre buia
-	    Stanza biblioteca = new Stanza("Biblioteca");
+		/* crea stanze del labirinto */
+		Stanza atrio = new Stanza("Atrio");
+		Stanza aulaN10 = new Stanza("Aula N10");
+		Stanza aulaN11 = new Stanza("Aula N11");
+		Stanza laboratorio = new Stanza("Laboratorio Campus");
+		StanzaBuia N2 = new StanzaBuia("N2", "lanterna");
+		StanzaBloccata bagno = new StanzaBloccata("Bagno", "nord", "chiave");
+		StanzaMagica N9 = new StanzaMagica("N9");
+		StanzaBuia N3 = new StanzaBuia("N3", null); // sempre buia
+		Stanza biblioteca = new Stanza("Biblioteca");
 
-	    
-	    stanze.add(atrio);
-	    stanze.add(aulaN10);
-	    stanze.add(aulaN11);
-	    stanze.add(laboratorio);
-	    stanze.add(N2);
-	    stanze.add(bagno);
-	    stanze.add(N9);
-	    stanze.add(N3);
-	    stanze.add(biblioteca);
-	    //...
 
-	    /* collega le stanze */
-	    atrio.impostaStanzaAdiacente("nord", laboratorio);
+		stanze.add(atrio);
+		stanze.add(aulaN10);
+		stanze.add(aulaN11);
+		stanze.add(laboratorio);
+		stanze.add(N2);
+		stanze.add(bagno);
+		stanze.add(N9);
+		stanze.add(N3);
+		stanze.add(biblioteca);
+		//...
 
-	    laboratorio.impostaStanzaAdiacente("sud", atrio);
-	    laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
+		/* collega le stanze */
+		atrio.impostaStanzaAdiacente("nord", laboratorio);
 
-	    aulaN11.impostaStanzaAdiacente("est", laboratorio);
-	    aulaN11.impostaStanzaAdiacente("ovest", aulaN10);
-	    aulaN11.impostaStanzaAdiacente("nord", N2);
+		laboratorio.impostaStanzaAdiacente("sud", atrio);
+		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
 
-	    aulaN10.impostaStanzaAdiacente("est", aulaN11);
+		aulaN11.impostaStanzaAdiacente("est", laboratorio);
+		aulaN11.impostaStanzaAdiacente("ovest", aulaN10);
+		aulaN11.impostaStanzaAdiacente("nord", N2);
 
-	    N2.impostaStanzaAdiacente("sud", aulaN11);
-	    N2.impostaStanzaAdiacente("nord", bagno);
+		aulaN10.impostaStanzaAdiacente("est", aulaN11);
 
-	    bagno.impostaStanzaAdiacente("sud", N2);
-	    bagno.impostaStanzaAdiacente("nord", N9);
+		N2.impostaStanzaAdiacente("sud", aulaN11);
+		N2.impostaStanzaAdiacente("nord", bagno);
 
-	    N9.impostaStanzaAdiacente("sud", bagno);
-	    N9.impostaStanzaAdiacente("nord", biblioteca);
-	    N9.impostaStanzaAdiacente("ovest", N3);
+		bagno.impostaStanzaAdiacente("sud", N2);
+		bagno.impostaStanzaAdiacente("nord", N9);
 
-	    N3.impostaStanzaAdiacente("ovest", N9);
+		N9.impostaStanzaAdiacente("sud", bagno);
+		N9.impostaStanzaAdiacente("nord", biblioteca);
+		N9.impostaStanzaAdiacente("ovest", N3);
 
-	    biblioteca.impostaStanzaAdiacente("sud", N9);
+		N3.impostaStanzaAdiacente("ovest", N9);
 
-	    /* pone gli attrezzi nelle stanze */
-	    atrio.addAttrezzo(osso);
-	    aulaN10.addAttrezzo(lanterna);
-	    aulaN11.addAttrezzo(chiave);
+		biblioteca.impostaStanzaAdiacente("sud", N9);
 
-	    /* definizione inizio/fine gioco */
-	    this.stanzaIniziale = atrio;
-	    this.stanzaCorrente = this.stanzaIniziale;
-	    this.stanzaFinale = biblioteca;
+		/* pone gli attrezzi nelle stanze */
+		atrio.addAttrezzo(osso);
+		aulaN10.addAttrezzo(lanterna);
+		aulaN11.addAttrezzo(chiave);
+
+		/* definizione inizio/fine gioco */
+		this.stanzaIniziale = atrio;
+		this.stanzaCorrente = this.stanzaIniziale;
+		this.stanzaFinale = biblioteca;
 	}
-	
+
 	public Set<Stanza> getStanze(){
 		return stanze;
 	}
-	
+
 }

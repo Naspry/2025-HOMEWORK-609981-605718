@@ -6,16 +6,16 @@ import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendi extends AbstractComando {
-	private IO io;
+	
 	String attrezzoDaPrendere;
 
 	public ComandoPrendi(IO io) {
-		this.io = io;
+		setIO(io);
 	}
 	@Override
 	public void esegui(Partita partita) {
 		if(attrezzoDaPrendere == null) {
-			io.mostraMessaggio("Cosa vuoi prendere? Devi specificare l'attrezzo");
+			getIO().mostraMessaggio("Cosa vuoi prendere? Devi specificare l'attrezzo");
 			return;
 		}
 		if(!partita.getGiocatore().getBorsa().isFull()) {		//se la borsa non è piena
@@ -24,11 +24,11 @@ public class ComandoPrendi extends AbstractComando {
 			if(stanzaCorrente.hasAttrezzo(attrezzoDaPrendere)) {
 				if(partita.getGiocatore().getBorsa().getPeso() + att.getPeso() <=partita.getGiocatore().getBorsa().getPesoMax()) {
 					partita.getGiocatore().getBorsa().addAttrezzo(att);
-					io.mostraMessaggio("Hai aggiunto "+ attrezzoDaPrendere +" alla borsa");
+					getIO().mostraMessaggio("Hai aggiunto "+ attrezzoDaPrendere +" alla borsa");
 					stanzaCorrente.removeAttrezzo(att);
-				}else io.mostraMessaggio(attrezzoDaPrendere + " pesa troppo");
-			}else io.mostraMessaggio(attrezzoDaPrendere + " non presente");
-		}else io.mostraMessaggio("La borsa è piena");
+				}else getIO().mostraMessaggio(attrezzoDaPrendere + " pesa troppo");
+			}else getIO().mostraMessaggio(attrezzoDaPrendere + " non presente");
+		}else getIO().mostraMessaggio("La borsa è piena");
 		return;
 	}
 
