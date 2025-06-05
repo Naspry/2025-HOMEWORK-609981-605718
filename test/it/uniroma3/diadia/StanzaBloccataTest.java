@@ -18,15 +18,15 @@ class StanzaBloccataTest {
 
 	@BeforeEach
 	void setUp() {
-		stanzaBloccata = new StanzaBloccata("stanzaBloccata", "est", "chiave");
+		stanzaBloccata = new StanzaBloccata("stanzaBloccata", Direzione.EST, "chiave");
 		stanzaEffettivamenteBloccata = new Stanza("stanzaQualsiasi");
-		stanzaBloccata.impostaStanzaAdiacente("est", stanzaEffettivamenteBloccata);
-		stanzaBloccata.impostaStanzaAdiacente("nord", stanza2);
+		stanzaBloccata.impostaStanzaAdiacente(Direzione.EST, stanzaEffettivamenteBloccata);
+		stanzaBloccata.impostaStanzaAdiacente(Direzione.NORD, stanza2);
 	}
 	void testStampaDirezioni() {
-		Set<String> direzioni = stanzaBloccata.getDirezioni();
-		assertTrue(direzioni.contains("est"));
-		assertTrue(direzioni.contains("nord"));
+		Set<Direzione> direzioni = stanzaBloccata.getDirezioni();
+		assertTrue(direzioni.contains(Direzione.EST));
+		assertTrue(direzioni.contains(Direzione.NORD));
 		assertEquals(2, direzioni.size());
 	}
 	/*
@@ -37,13 +37,13 @@ class StanzaBloccataTest {
 	}*/
 	@Test
 	void testAccessoSenzaAttrezzo() {
-		assertEquals(stanzaBloccata, stanzaBloccata.getStanzaAdiacente("est"));
+		assertEquals(stanzaBloccata, stanzaBloccata.getStanzaAdiacente(Direzione.EST));
 	}
 	
 	@Test
 	void testAccessoConAttrezzo() {
 		chiave = new Attrezzo("chiave", 2);
 		stanzaBloccata.addAttrezzo(chiave);
-		assertEquals(stanzaEffettivamenteBloccata, stanzaBloccata.getStanzaAdiacente("est"));
+		assertEquals(stanzaEffettivamenteBloccata, stanzaBloccata.getStanzaAdiacente(Direzione.EST));
 	}
 }

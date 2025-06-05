@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Strega extends AbstractPersonaggio {
@@ -18,17 +19,18 @@ public class Strega extends AbstractPersonaggio {
 
     @Override
     public String interagisci(Partita p) {
-        Set<String> direzioni = p.getStanzaCorrente().getDirezioni();
+        Set<Direzione> direzioni = p.getStanzaCorrente().getDirezioni();
 
         if (direzioni.isEmpty())
             return "Nessuna stanza adiacente.";
 
-        String direzioneTarget = null;
+        Direzione direzioneTarget = null;
 
         if (this.haSalutato()) {
             // Cerca la stanza adiacente con più attrezzi
             int maxAttrezzi = -1;
-            for (String dir : direzioni) {
+            
+            for (Direzione dir : direzioni) {
                 int numAttrezzi = p.getStanzaCorrente().getStanzaAdiacente(dir).getAttrezzi().size();
                 if (numAttrezzi > maxAttrezzi) {
                     maxAttrezzi = numAttrezzi;
@@ -40,7 +42,7 @@ public class Strega extends AbstractPersonaggio {
         } else {
             // Cerca la stanza adiacente con meno attrezzi
             int minAttrezzi = Integer.MAX_VALUE;
-            for (String dir : direzioni) {
+            for (Direzione dir : direzioni) {
                 int numAttrezzi = p.getStanzaCorrente().getStanzaAdiacente(dir).getAttrezzi().size();
                 if (numAttrezzi < minAttrezzi) {
                     minAttrezzi = numAttrezzi;

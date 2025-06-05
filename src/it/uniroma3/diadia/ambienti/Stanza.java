@@ -21,6 +21,7 @@ public class Stanza {
 	private String nome;
 
 	private List<Attrezzo> attrezzi;
+	private Map<Direzione, Stanza> direzione2stanzaAdiacente;
 	private Map<String,Stanza> stanzeAdiacenti;
 
 	private AbstractPersonaggio personaggio;
@@ -32,6 +33,7 @@ public class Stanza {
 		this.nome = nome;
 		this.stanzeAdiacenti = new HashMap<>();
 		this.attrezzi = new ArrayList<>();
+		this.direzione2stanzaAdiacente = new HashMap<>();
 	}
 
 
@@ -48,17 +50,21 @@ public class Stanza {
 	 * @param direzione direzione in cui sara' posta la stanza adiacente.
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		this.stanzeAdiacenti.put(direzione, stanza);
-	}
+	
+	 public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
+	        if(this.direzione2stanzaAdiacente.size() >= NUMERO_MASSIMO_DIREZIONI)
+	        	return;
+	        this.direzione2stanzaAdiacente.put(direzione, stanza);
+	    }
 
 	/**
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
-		return this.stanzeAdiacenti.get(direzione);
-	}
+	 public Stanza getStanzaAdiacente(Direzione direzione) {
+	        return this.direzione2stanzaAdiacente.get(direzione);
+		}
+
 
 	/**
 	 * Restituisce la nome della stanza.
@@ -112,9 +118,7 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
 		risultato.append("\nUscite: ");
-		for (String direzione : this.getDirezioni())
-			if (direzione!=null)
-				risultato.append(" " + direzione);
+		risultato.append(this.direzione2stanzaAdiacente.keySet().toString());
 		risultato.append("\nAttrezzi nella stanza: ");
 		for (Attrezzo attrezzo : this.attrezzi) {
 			if(attrezzo != null)
@@ -172,8 +176,8 @@ public class Stanza {
 	}
 
 
-	public Set<String> getDirezioni() {
-		return stanzeAdiacenti.keySet();
+	public Set<Direzione> getDirezioni(){
+		return this.direzione2stanzaAdiacente.keySet();
 	}
 
 	public int getNumeroAttrezzi() {

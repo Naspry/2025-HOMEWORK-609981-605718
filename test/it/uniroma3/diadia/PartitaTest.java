@@ -25,7 +25,7 @@ class PartitaTest {
 	@Test
 	void testIsFinitaWin() {
 		// Imposta la stanza corrente in quella finale (simulando una vittoria)
-		labirinto.setStanzaCorrente(labirinto.getStanzaFinale());
+		labirinto.setStanzaCorrente(labirinto.getStanzaVincente());
 		assertTrue(partita.isFinita(), "Il gioco dovrebbe essere finito quando il giocatore è nella stanza finale");
 	}
 	

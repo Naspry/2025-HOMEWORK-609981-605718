@@ -1,0 +1,6 @@
+Stanze: biblioteca, N10, N11, corridoio, laboratorio
+Inizio: N10
+Vincente: N11
+Attrezzi: martello 10 biblioteca, pinza 2 N10, chiave 1 laboratorio
+Mago: biblioteca Gandalf "Proteggi la conoscenza" libro
+Uscite: N10 sud biblioteca, biblioteca nord N10, biblioteca est corridoio, corridoio ovest biblioteca, corridoio sud laboratorio, laboratorio nord corridoio, laboratorio est N11

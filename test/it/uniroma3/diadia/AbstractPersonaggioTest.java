@@ -6,6 +6,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 import it.uniroma3.diadia.personaggi.Cane;
 import it.uniroma3.diadia.personaggi.Mago;
 import it.uniroma3.diadia.personaggi.Strega;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -66,8 +67,8 @@ public class AbstractPersonaggioTest {
 	    sud.addAttrezzo(new Attrezzo("pietra", 2));
 
 	    // Collego le stanze alla stanza corrente
-	    stanza.impostaStanzaAdiacente("nord", nord);
-	    stanza.impostaStanzaAdiacente("sud", sud);
+	    stanza.impostaStanzaAdiacente(Direzione.NORD, nord);
+	    stanza.impostaStanzaAdiacente(Direzione.SUD, sud);
 
 	    // Creo la strega e la saluto prima di interagire
 	    Strega s = new Strega("streghetta", "sono una strega");
@@ -93,8 +94,8 @@ public class AbstractPersonaggioTest {
 	    // sud resta vuota
 
 	    // Collego le stanze alla stanza corrente
-	    stanza.impostaStanzaAdiacente("nord", nord);
-	    stanza.impostaStanzaAdiacente("sud", sud);
+	    stanza.impostaStanzaAdiacente(Direzione.NORD, nord);
+	    stanza.impostaStanzaAdiacente(Direzione.SUD, sud);
 
 	    // Creo la strega SENZA salutarla
 	    Strega s = new Strega("streghetta", "sono una strega");

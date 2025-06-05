@@ -57,7 +57,7 @@ public class Partita {
 	} 
 
 	public boolean isVinta() {
-		return this.labirinto.getStanzaCorrente() == this.labirinto.getStanzaFinale();
+		return this.labirinto.getStanzaCorrente() == this.labirinto.getStanzaVincente();
 	}
 
 	public Stanza getStanzaCorrente() {
