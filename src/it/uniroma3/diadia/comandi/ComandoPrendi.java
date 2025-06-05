@@ -14,6 +14,7 @@ public class ComandoPrendi extends AbstractComando {
 	}
 	@Override
 	public void esegui(Partita partita) {
+		String attrezzoDaPrendere = getParametro();
 		if(attrezzoDaPrendere == null) {
 			getIO().mostraMessaggio("Cosa vuoi prendere? Devi specificare l'attrezzo");
 			return;

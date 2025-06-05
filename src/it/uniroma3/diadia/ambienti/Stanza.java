@@ -50,20 +50,20 @@ public class Stanza {
 	 * @param direzione direzione in cui sara' posta la stanza adiacente.
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
-	
-	 public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
-	        if(this.direzione2stanzaAdiacente.size() >= NUMERO_MASSIMO_DIREZIONI)
-	        	return;
-	        this.direzione2stanzaAdiacente.put(direzione, stanza);
-	    }
+
+	public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
+		if(this.direzione2stanzaAdiacente.size() >= NUMERO_MASSIMO_DIREZIONI)
+			return;
+		this.direzione2stanzaAdiacente.put(direzione, stanza);
+	}
 
 	/**
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * @param direzione
 	 */
-	 public Stanza getStanzaAdiacente(Direzione direzione) {
-	        return this.direzione2stanzaAdiacente.get(direzione);
-		}
+	public Stanza getStanzaAdiacente(Direzione direzione) {
+		return this.direzione2stanzaAdiacente.get(direzione);
+	}
 
 
 	/**
@@ -123,6 +123,9 @@ public class Stanza {
 		for (Attrezzo attrezzo : this.attrezzi) {
 			if(attrezzo != null)
 				risultato.append(attrezzo.toString()+" ");
+		}
+		if(this.getPersonaggio()!=null) {
+			risultato.append("\nPersonaggo:" + this.getPersonaggio().toString());
 		}
 		return risultato.toString();
 	}

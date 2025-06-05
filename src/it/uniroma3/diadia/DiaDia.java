@@ -2,8 +2,12 @@ package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -92,12 +96,65 @@ public class DiaDia {
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
 		Labirinto labirinto = Labirinto.newBuilder()
-				.addStanzaIniziale("LabCampusOne")
-				.addStanzaVincente("Biblioteca")
-				.addStanza("N12")
-				.addAdiacenza("LabCampusOne","N12",Direzione.EST)
-				.addAdiacenza("LabCampusOne","Biblioteca",Direzione.OVEST)
-				.getLabirinto();
+			    .addStanzaIniziale("Ingresso")
+			    .addAttrezzo("Ingresso", "lanterna", 1)
+
+			    .addStanza("Corridoio")
+			    .addAttrezzo("Corridoio", "chiave", 1)
+
+			    .addStanzaBuia("Cantina", "lanterna")
+			    .addAttrezzo("Cantina", "scopa", 2)
+
+			    .addStanzaMagica("Laboratorio")
+			    .addAttrezzo("Laboratorio", "pozione", 1)
+
+			    .addStanzaBloccata("PortoneNord", "chiave", Direzione.NORD)
+
+			    .addStanza("Giardino")
+			    .addAttrezzo("Giardino", "osso", 1)
+
+			    .addStanza("Cameretta")
+			    .addAttrezzo("Cameretta", "cuscino", 1)
+
+			    .addStanza("Cucina")
+			    .addAttrezzo("Cucina", "coltello", 2)
+
+			    .addStanzaMagica("SalaAlchimia")
+			    .addAttrezzo("SalaAlchimia", "elisir", 1)
+
+			    .addStanzaBuia("Soffitta", "lanterna")
+
+			    .addStanza("Atrio")
+
+			    .addStanzaBloccata("PortaSegreta", "pozione", Direzione.EST)
+
+			    .addStanza("SalaTrono")
+
+			    .addStanzaVincente("Tesoro")
+
+			    // Collegamenti
+			    .addAdiacenza("Ingresso", "Corridoio", Direzione.NORD)
+			    .addAdiacenza("Corridoio", "Cantina", Direzione.EST)
+			    .addAdiacenza("Corridoio", "Laboratorio", Direzione.NORD)
+			    .addAdiacenza("Laboratorio", "PortoneNord", Direzione.NORD)
+			    .addAdiacenza("PortoneNord", "Giardino", Direzione.NORD)
+			    .addAdiacenza("Giardino", "Cameretta", Direzione.EST)
+			    .addAdiacenza("Cameretta", "Cucina", Direzione.SUD)
+			    .addAdiacenza("Cucina", "SalaAlchimia", Direzione.EST)
+			    .addAdiacenza("SalaAlchimia", "Soffitta", Direzione.NORD)
+			    .addAdiacenza("Soffitta", "Atrio", Direzione.OVEST)
+			    .addAdiacenza("Atrio", "PortaSegreta", Direzione.OVEST)
+			    .addAdiacenza("PortaSegreta", "SalaTrono", Direzione.EST)
+			    .addAdiacenza("SalaTrono", "Tesoro", Direzione.NORD)
+
+			    // Personaggi (usando il nuovo metodo)
+			    .addPersonaggioA("Cameretta", new Cane("Fido", "Guaisce felice"))
+			    .addPersonaggioA("Laboratorio", new Mago("Merlino", "Parla con voce cavernosa", new Attrezzo("bacchetta", 1)))
+			    .addPersonaggioA("Soffitta", new Strega("Morgana", "Ride misteriosamente"))
+
+			    .getLabirinto();
+
+
 				DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
 	}

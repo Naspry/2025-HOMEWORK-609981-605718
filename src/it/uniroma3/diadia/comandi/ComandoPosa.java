@@ -7,10 +7,15 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa extends AbstractComando {
+	
+
+	public ComandoPosa(IO io) {
+		super.setIO(io);
+	}
 
 	@Override
 	public void esegui(Partita partita) {
-		String attrezzoDaPosare = this.getParametro();  // usa parametro ereditato
+		String attrezzoDaPosare = getParametro();  // usa parametro ereditato
 
 		if(attrezzoDaPosare == null) {
 			getIO().mostraMessaggio("Cosa vuoi posare? Devi specificare l'attrezzo");

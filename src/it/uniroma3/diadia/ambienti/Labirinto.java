@@ -133,6 +133,12 @@ public class Labirinto{
 			this.ultimaAggiunta = stanza;
 			this.nome2stanza.put(stanza.getNome(), stanza);
 		}
+		public LabirintoBuilder addPersonaggioA(String nomeStanza, AbstractPersonaggio p) {
+		    Stanza stanza = this.nome2stanza.get(nomeStanza);
+		    if (stanza != null)
+		        stanza.setPersonaggio(p);
+		    return this;
+		}
 		
 
 	}

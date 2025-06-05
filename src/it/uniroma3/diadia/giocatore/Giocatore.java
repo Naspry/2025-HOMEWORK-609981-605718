@@ -15,7 +15,7 @@ public class Giocatore {
 	private Borsa borsa;
 
 	public Giocatore() { 
-		this.cfu = ConfigurazioniIniziali.getCFU();
+		this.cfu = 20;
 	    this.borsa = new Borsa(ConfigurazioniIniziali.getPesoMax());
 	}
 	
